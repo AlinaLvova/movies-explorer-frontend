@@ -2,8 +2,8 @@ import { useState, React } from 'react';
 
 function Register() {
     return (
-        <div className="">
-
+        // <div className="">
+        <div>
         </div>
     )
 }

@@ -2,8 +2,8 @@ import { useState, React } from 'react';
 
 function Profile() {
     return (
-        <div className="">
-
+        // <div className="">
+        <div>
         </div>
     )
 }
