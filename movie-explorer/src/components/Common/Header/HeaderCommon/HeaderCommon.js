@@ -1,5 +1,5 @@
 import './HeaderCommon.css';
-import '../constant/common.css';
+import '../../constant/common.css';
 import { Link } from 'react-router-dom';
 import { useState, React } from "react";
 

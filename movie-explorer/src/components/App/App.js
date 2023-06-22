@@ -3,14 +3,24 @@ import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useRef } from 'react'
 import Header from '../Common/Header/Header';
+import Menu from '../Common/Header/Menu/Menu';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   
+  const handleOpenMenu = () => {
+    setIsMenuOpen(true);
+  };
+
+  const closeAllPopups = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <div className="page">
       <div className="page__container">
-        <Header></Header>
+        <Header onClickMenuButton={handleOpenMenu}></Header>
         <main className="page__main">
           <Routes>
             <Route
@@ -58,6 +68,10 @@ function App() {
           </Routes>
         </main>
         <footer className="page__footer"></footer>
+        <Menu 
+          isOpen={isMenuOpen}
+          onClose={closeAllPopups}
+        />
       </div>
     </div>
   );

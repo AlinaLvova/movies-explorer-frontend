@@ -43,11 +43,10 @@
     line-height: 12px;
     
     color: var(--text-color-white);
-    text-decoration: none;
 }
 
 .header__account-logo {
-    background-image: url(../../../images/logo-account.svg);
+    background-image: url(../../../../images/logo-account.svg);
     width: 26px;
     height: 26px;
     border-radius: 50%;

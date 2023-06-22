@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Link, useLocation } from "react-router-dom";
-import HeaderCommon from "../HeaderCommon/HeaderCommon.js";
+import HeaderCommon from "./HeaderCommon/HeaderCommon.js";
+import Menu from "./Menu/Menu.js";
 import "./Header.css";
 import "../constant/common.css";
 import { MENU_ICON_SCREEN_WIDTH } from "../../../utils/constant.js"
 import logo from "../../../images/logo-header.svg";
 
-function Header() {
+function Header(props) {
+  const paths = ["/movies", "/saved-movies", "/profile"];
   const location = useLocation();
   const [headerColor, setHeaderColor] = useState(
     location.pathname === "/" ? "landing" : "main"
@@ -49,7 +51,9 @@ function Header() {
     setWidth(window.innerWidth);
   }
 
-  const paths = ["/movies", "/saved-movies", "/profile"];
+  const handleOpenMenu = () => {
+    props.onClickMenuButton();
+  };
 
   return (
     <section
@@ -76,7 +80,6 @@ function Header() {
               </div>
             }
           />
-
           <Route
             exact
             path="/signin"
@@ -98,7 +101,10 @@ function Header() {
               element={
                 <>
                   {width < MENU_ICON_SCREEN_WIDTH ? (
-                    <div></div>
+                    <button
+                      className="header__menu-button button-style link"
+                      onClick={handleOpenMenu}
+                    ></button>
                   ) : (
                     <HeaderCommon />
                   )}
