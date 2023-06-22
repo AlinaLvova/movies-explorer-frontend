@@ -9,3 +9,6 @@
     --text-color-red: #EE3465;
   }
   
+  :root{
+    --section-max-width: 1140px;
+  }

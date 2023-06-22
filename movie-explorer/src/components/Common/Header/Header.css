@@ -1,1 +1,136 @@
-@import url(.);
+.header-container {
+    padding-top: 18px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.header-container__color_landing {
+    background-color: var(--background-color-blue);
+}
+
+.header-container__color_main {
+    background-color: var(--background-color-grey);
+}
+
+.header {
+    width: 100%;
+    max-width: var(--section-max-width);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 18px;
+}
+
+
+.header__logo {
+    width: 38px;
+    height: 38px;
+}
+
+.header__auth {
+    margin: 0;
+    display: flex;
+    width: 183px;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.header__signin-button {
+    margin: 0;
+    background: var(--button-color-green) !important;
+    border-radius: 3px !important;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    width: 76px;
+    height: 32px;
+    padding: 0;
+}
+
+.header__signup-button {
+    padding: 0;
+    margin: 0;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--text-color-white);
+    width: 77px;
+}
+
+.header__welcome-container {
+    padding-top: 40px;
+    width: 100%;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    color: var(--text-color-white);
+
+}
+
+.header__container-auth {
+    padding-top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 396px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.header-container__display_none{
+    display: none !important;
+}
+
+
+@media screen and (max-width: 1280px) {
+    .header {
+        max-width: 89%;
+    }
+    .header__container-auth{
+        max-width: 396px !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        max-width: 92%;
+    }
+    .header__container-auth{
+        padding-top: calc((232 - 18)/ 768 * 100%);
+        max-width: 51.5% !important;
+    }
+    .header-container{
+        
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .header__signup-button{
+        font-size: 10px;
+    }
+    .header__signin-button{
+        width: 54px;
+        height: 26px;
+    }
+    .header__auth{
+        width: 132px;
+    }
+    .header__container-auth{
+        max-width: 260px !important;
+        align-items: center;
+    }
+    .header__welcome-container {
+        text-align: center;
+    }
+    
+}

@@ -1,0 +1,18 @@
+.button-style{
+    background: transparent;
+    border: none;
+}
+
+.link{
+    transition: opacity 0.3s ease-in-out;
+    cursor: pointer;
+    border-style: none !important;
+    text-decoration: none;
+}
+
+.link:hover{
+    opacity: 0.6;
+}
+
+.link:visited {
+  }

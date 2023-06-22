@@ -2,6 +2,7 @@ import './App.css';
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useRef } from 'react'
+import Header from '../Common/Header/Header';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -9,16 +10,16 @@ function App() {
   return (
     <div className="page">
       <div className="page__container">
-        <header className="page__header"></header>
+        <Header></Header>
         <main className="page__main">
           <Routes>
             <Route
               path="*"
               element={
                 loggedIn ? (
-                  <Navigate to="/" replace />
+                  <Navigate to="/movies" replace />
                 ) : (
-                  <Navigate to="/signin" replace />
+                  <Navigate to="/" replace />
                 )
               }
             ></Route>
@@ -44,6 +45,12 @@ function App() {
             ></Route>
             <Route
               path="/saved-movies"
+              // element={
+              //    <ProtectedRouteElement />
+              // }
+            ></Route>
+            <Route
+              path="/404"
               // element={
               //    <ProtectedRouteElement />
               // }
