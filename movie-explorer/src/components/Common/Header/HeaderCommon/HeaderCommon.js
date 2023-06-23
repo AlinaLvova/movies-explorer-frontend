@@ -2,6 +2,7 @@ import './HeaderCommon.css';
 import '../../constant/common.css';
 import { Link } from 'react-router-dom';
 import { useState, React } from "react";
+import ProfileButton from '../ProfileButton/ProfileButton';
 
 function HeaderCommon() {
   return (
@@ -16,12 +17,7 @@ function HeaderCommon() {
           </button>
         </Link>
       </div>
-      <div className="header__account-container button-style">
-        <Link to="/profile" className="header__account-text link">
-          Аккаунт
-        </Link>
-        <div className="header__account-logo"></div>
-      </div>
+      <ProfileButton/>
     </div>
   );
 }

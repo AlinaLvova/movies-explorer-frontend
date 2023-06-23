@@ -2,6 +2,7 @@ import "./Menu.css";
 import "../../constant/common.css";
 import "../HeaderCommon/HeaderCommon";
 import usePopupClose from "../../../../hooks/usePopupClose";
+import ProfileButton from '../ProfileButton/ProfileButton';
 
 import React, { useState } from "react";
 import { Routes, Route, Link, useLocation } from "react-router-dom";
@@ -39,13 +40,8 @@ function Menu({isOpen, onClose}) {
                 Сохранённые фильмы
               </Link>
             </div>
-            <div className="menu__acount">
-              <div className="header__account-container button-style">
-                <Link to="/profile" className="header__account-text link">
-                  Аккаунт
-                </Link>
-                <div className="header__account-logo"></div>
-              </div>
+            <div className="menu__acсount">
+              <ProfileButton/>
             </div>
           </div>
         )}

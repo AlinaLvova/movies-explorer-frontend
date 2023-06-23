@@ -24,31 +24,3 @@
     color: var(--text-color-white);
 }
 
-.header__account-container {
-    background: transparent;
-    border-style: none;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 86px;
-    padding: 0;
-    margin: 0;
-}
-
-.header__account-text {
-    font-size: 13px;
-    font-family: Inter;
-    font-weight: 500;
-    line-height: 12px;
-    
-    color: var(--text-color-white);
-}
-
-.header__account-logo {
-    background-image: url(../../../../images/logo-account.svg);
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    border-style: none;
-}

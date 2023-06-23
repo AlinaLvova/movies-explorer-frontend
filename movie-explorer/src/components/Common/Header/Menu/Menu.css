@@ -22,6 +22,7 @@
 
 .menu.open .menu__container {
     opacity: 1;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .menu__container {
@@ -63,8 +64,7 @@
     text-decoration: underline;
 }
 
-
-.menu__acount{
+.menu__acсount{
     position: fixed;
     bottom: 90px;
 }
