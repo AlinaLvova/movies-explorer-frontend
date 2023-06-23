@@ -1,0 +1,44 @@
+.banner {
+    background-color: var(--background-color-blue);
+    display: flex;
+    background-image: url(../../../images/logo-landing.svg);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.banner__header {
+    text-align: center;
+    margin: calc((184 * (275 / 1280) * 100%) / 275) calc((275 / 1280) * 100%) calc((224 * (275 / 1280) * 100%) / 275) calc((275 / 1280) * 100%);
+    font-size: 50px;
+    font-family: Inter;
+    line-height: 58px;
+    letter-spacing: -2px;
+    padding: 0;
+    color: var(--text-color-white);
+}
+
+@media screen and (min-width: 1280px) and (max-width: 769px) {
+    .banner {
+        background-size: calc(320 / 1280 * 100vw) calc(320 / 1280 * 100vw);
+    }
+
+}
+
+@media screen and (max-width: 768px) and (min-width: 500px) {
+    .banner__header {
+        margin: calc((326 * (19 / 768) * 100%) / 19) calc((19 / 768) * 100%) calc((342 * (19 / 768) * 100%) / 19);
+    }
+   
+}
+
+@media screen and (max-width: 500px) and (min-width: 320px) {
+    .banner__header {
+        margin: calc((142 * (36 / 320) * 100%) / 36) calc((36 / 320) * 100%) calc((180 * (36 / 320) * 100%) / 36);
+        font-size: 31px;
+        line-height: 39px;
+        letter-spacing: -1.24px;
+    }
+    .banner {
+        background-size: calc(248 / 320 * 100vw) calc(248 / 320 * 100vw);
+    }
+}

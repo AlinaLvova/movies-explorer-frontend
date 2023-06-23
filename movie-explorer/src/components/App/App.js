@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRef } from 'react'
 import Header from '../Common/Header/Header';
 import Menu from '../Common/Header/Menu/Menu';
+import Main from '../Main/Main';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -21,7 +22,7 @@ function App() {
     <div className="page">
       <div className="page__container">
         <Header onClickMenuButton={handleOpenMenu}></Header>
-        <main className="page__main">
+        <main className="content">
           <Routes>
             <Route
               path="*"
@@ -65,9 +66,15 @@ function App() {
               //    <ProtectedRouteElement />
               // }
             ></Route>
+            <Route
+              path="/"
+              element={
+                 <Main />
+              }
+            ></Route>
           </Routes>
         </main>
-        <footer className="page__footer"></footer>
+        {/* <footer className="footer"></footer> <Footer></Footer> */}
         <Menu 
           isOpen={isMenuOpen}
           onClose={closeAllPopups}

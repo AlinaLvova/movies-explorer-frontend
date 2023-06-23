@@ -41,3 +41,8 @@
     opacity: 1;
     visibility: visible;
 }
+
+.content{
+    margin: 0;
+    padding: 0;
+}
