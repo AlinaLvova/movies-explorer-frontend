@@ -11,6 +11,7 @@
     margin: calc((184 * (275 / 1280) * 100%) / 275) calc((275 / 1280) * 100%) calc((224 * (275 / 1280) * 100%) / 275) calc((275 / 1280) * 100%);
     font-size: 50px;
     font-family: Inter;
+    font-weight: 400;
     line-height: 58px;
     letter-spacing: -2px;
     padding: 0;
