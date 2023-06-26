@@ -51,7 +51,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 4fr;
-    
+
 }
 
 .about-project__timeline-bar {
@@ -62,32 +62,30 @@
     margin-bottom: 14px;
 }
 
-.about-project__timeline-bar_green{
+.about-project__timeline-bar_green {
     background-color: var(--button-color-green);
     color: #000;
 }
 
-.about-project__timeline-bar_grey{
+.about-project__timeline-bar_grey {
     background-color: var(--button-color-grey);
 }
 
 .about-project__caption {
     text-align: center;
     font-size: 14px;
-font-family: Inter;
-font-weight: 500;
-line-height: 17px;
-color: var(--text-color-grey);
+    font-family: Inter;
+    font-weight: 500;
+    line-height: 17px;
+    color: var(--text-color-grey);
 }
 
-@media screen and (max-width: 1279px) and (min-width: 791px) {
-
-}
+@media screen and (max-width: 1279px) and (min-width: 791px) {}
 
 @media screen and (max-width: 790px) {
     .about-project__container {
-            width: 95%;
-        }
+        width: 95%;
+    }
 
     .about-project__table {
         gap: 0px;
@@ -97,24 +95,24 @@ color: var(--text-color-grey);
         width: 97%;
         margin-bottom: 96px;
         font-size: 12px;
-line-height: 18px;
+        line-height: 18px;
     }
 
-    .about-project__subtitle{
+    .about-project__subtitle {
         font-size: 20px;
-letter-spacing: -0.8px;
+        letter-spacing: -0.8px;
     }
 
-    .about-project__title{
+    .about-project__title {
         font-size: 22px;
         letter-spacing: -0.88px;
 
     }
 
-    .about-project__caption{
+    .about-project__caption {
         font-size: 14px;
-font-family: Suisse Intl;
-line-height: 17px;
+        font-family: Suisse Intl;
+        line-height: 17px;
     }
 
     .about-project {
@@ -128,8 +126,8 @@ line-height: 17px;
 
 @media screen and (max-width: 621px) and (min-width: 320px) {
     .about-project__container {
-            width: 100%;
-        }
+        width: 100%;
+    }
 
     .about-project__table {
         grid-template-columns: 1fr;
@@ -140,22 +138,22 @@ line-height: 17px;
         width: 100%;
         margin-bottom: 56px;
         font-size: 11px;
-line-height: 16px;
+        line-height: 16px;
     }
 
     .about-project__timeline-container {
         grid-template-columns: 1fr 2fr;
-        
+
     }
 
-    .about-project__title{
+    .about-project__title {
         font-size: 18px;
-letter-spacing: -0.72px;
+        letter-spacing: -0.72px;
     }
 
-    .about-project__subtitle{
+    .about-project__subtitle {
         font-size: 18px;
-letter-spacing: -0.72px;
+        letter-spacing: -0.72px;
     }
 
     .about-project {
