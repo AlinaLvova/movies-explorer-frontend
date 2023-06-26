@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import Banner from './Banner/Banner';
 import NavTab from './NavTab/NavTab';
+import AboutProject from './AboutProject/AboutProject';
 import './Main.css';
 
 function Main() {
@@ -9,6 +10,7 @@ function Main() {
     <section className="main">
       <Banner />
       <NavTab />
+      <AboutProject />
     </section>
   );
 }

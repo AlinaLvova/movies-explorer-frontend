@@ -8,6 +8,7 @@
   -moz-text-size-adjust: 100%;
   font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
   text-rendering: optimizeLegibility;
+  color: var(--text-color-white);
 }
 
 .page__container{
