@@ -1,0 +1,37 @@
+.navtab {
+    background-color: var(--background-color-grey);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.nav__list {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    padding: 25px 0;
+    width: 276px;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.nav__element {
+    font-size: 13px;
+    font-family: Inter;
+    font-weight: 500;
+    line-height: 16px;
+    text-decoration-line: underline;
+    color: var(--text-color-white);
+
+}
+
+
+@media screen and (max-width: 500px) and (min-width: 320px) {
+    .nav__element {
+        font-size: 11px;
+    }
+    .nav__list{
+        width: 214px;
+    }
+}
