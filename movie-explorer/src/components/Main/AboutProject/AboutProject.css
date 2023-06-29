@@ -28,6 +28,7 @@
     font-family: Inter;
     letter-spacing: -0.72px;
     width: 100%;
+    font-weight: 400;
 }
 
 .about-project__description {

@@ -7,11 +7,11 @@ function Techs() {
   return (
     <section className="techs">
       <SectionHeader headerTitle={"Технологии"} />
-      <div className="techs__title">7 технологий</div>
-      <div className="techs__subtitle">
+      <h1 className="techs__title">7 технологий</h1>
+      <h4 className="techs__subtitle">
         На курсе веб-разработки мы освоили технологии, которые применили в
         дипломном проекте.
-      </div>
+      </h4>
       <div className="techs__elements-wrapper">
         <div className="techs__element">HTML</div>
         <div className="techs__element">CSS</div>
