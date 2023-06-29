@@ -59,6 +59,7 @@
     height: calc(88px + 99px);
     min-width: 100px;
     word-wrap: normal;
+    text-align: justify;
 }
 
 .about-me__githubLink {
@@ -135,7 +136,7 @@
 
     .about-me__info {
         padding-top: 40px;
-        width: 90%;
+        width: 80%;
     }
 }
 

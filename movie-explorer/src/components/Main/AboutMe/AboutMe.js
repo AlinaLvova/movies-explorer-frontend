@@ -6,7 +6,7 @@ import Portfolio from '../Portfolio/Portfolio';
 
 function AboutMe() {
   return (
-    <div className="about-me">
+    <div  id="AboutMe" className="about-me">
       <SectionHeader headerTitle={"Студент"} />
       <div className="about-me__wrapper">
         <img

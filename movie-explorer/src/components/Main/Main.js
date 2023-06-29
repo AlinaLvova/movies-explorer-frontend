@@ -12,9 +12,9 @@ function Main() {
     <section className="main">
       <Banner />
       <NavTab />
-      <AboutProject />
+      <AboutProject/>
       <Techs />
-      <AboutMe />
+      <AboutMe/>
     </section>
   );
 }

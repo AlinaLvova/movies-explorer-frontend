@@ -32,6 +32,11 @@
     text-decoration: none;
 }
 
+.portfolio__links{
+    padding:0;
+    margin: 0;
+}
+
 .portfolio__subtitle {
     font-size: 30px;
     font-family: Inter;

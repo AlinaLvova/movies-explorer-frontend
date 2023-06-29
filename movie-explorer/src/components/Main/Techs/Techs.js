@@ -5,7 +5,7 @@ import SectionHeader from "../../Common/SectionHeader/SectionHeader";
 
 function Techs() {
   return (
-    <section className="techs">
+    <section id="Techs" className="techs">
       <SectionHeader headerTitle={"Технологии"} />
       <h1 className="techs__title">7 технологий</h1>
       <h4 className="techs__subtitle">
