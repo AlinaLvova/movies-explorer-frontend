@@ -5,6 +5,7 @@
     letter-spacing: -0.72px;
     border-bottom: 1px solid var(--line);
     padding-bottom: 23px;
+    margin: 0;
 }
 
 @media screen and (max-width: 790px) {

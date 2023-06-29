@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Banner from './Banner/Banner';
 import NavTab from './NavTab/NavTab';
 import AboutProject from './AboutProject/AboutProject';
+import Techs from './Techs/Techs';
 import './Main.css';
 
 function Main() {
@@ -11,6 +12,7 @@ function Main() {
       <Banner />
       <NavTab />
       <AboutProject />
+      <Techs />
     </section>
   );
 }
