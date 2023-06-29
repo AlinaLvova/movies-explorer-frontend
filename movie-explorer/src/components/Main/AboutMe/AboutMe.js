@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import imageOfMe from "../../../images/me1.jpg";
 import "./AboutMe.css";
 import SectionHeader from "../../Common/SectionHeader/SectionHeader";
+import Portfolio from '../Portfolio/Portfolio';
 
 function AboutMe() {
   return (
@@ -26,12 +27,13 @@ function AboutMe() {
           </p>
           <a
             href="https://github.com/alinalvova"
-            className="about-me__githubLink"
+            className="about-me__githubLink link"
           >
             Github
           </a>
         </div>
       </div>
+      <Portfolio />
     </div>
   );
 }
