@@ -4,14 +4,6 @@
 }
 
 
-.about-project__title {
-    font-size: 18px;
-    font-family: Inter;
-    letter-spacing: -0.72px;
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 23px;
-}
-
 .about-project__table {
     margin: 0;
     margin-top: 70px;
@@ -103,12 +95,6 @@
         letter-spacing: -0.8px;
     }
 
-    .about-project__title {
-        font-size: 22px;
-        letter-spacing: -0.88px;
-
-    }
-
     .about-project__caption {
         font-size: 14px;
         font-family: Suisse Intl;
@@ -144,11 +130,6 @@
     .about-project__timeline-container {
         grid-template-columns: 1fr 2fr;
 
-    }
-
-    .about-project__title {
-        font-size: 18px;
-        letter-spacing: -0.72px;
     }
 
     .about-project__subtitle {

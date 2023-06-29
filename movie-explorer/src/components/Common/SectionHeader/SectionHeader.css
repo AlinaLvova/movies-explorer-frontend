@@ -1,0 +1,22 @@
+.section-header {
+    font-size: 18px;
+    font-family: Inter;
+    font-weight: 400;
+    letter-spacing: -0.72px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 23px;
+}
+
+@media screen and (max-width: 790px) {
+    .section-header {
+        font-size: 22px;
+        letter-spacing: -0.88px;
+    }
+}
+
+@media screen and (max-width: 621px) and (min-width: 320px) {
+    .section-header {
+        font-size: 18px;
+        letter-spacing: -0.72px;
+    }
+}
