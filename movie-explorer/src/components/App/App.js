@@ -1,16 +1,17 @@
-import './App.css';
+import "./App.css";
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useRef } from 'react'
-import Header from '../Common/Header/Header';
-import Menu from '../Common/Header/Menu/Menu';
-import Footer from '../Common/Footer/Footer';
-import Main from '../Main/Main';
+import { useRef } from "react";
+import Header from "../Common/Header/Header";
+import Menu from "../Common/Header/Menu/Menu";
+import Footer from "../Common/Footer/Footer";
+import Main from "../Main/Main";
+import Movies from "../Movies/Movies";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+
   const handleOpenMenu = () => {
     setIsMenuOpen(true);
   };
@@ -50,11 +51,7 @@ function App() {
               path="/profile"
               // element={}
             ></Route>
-            <Route
-              exact
-              path="/movies"
-              // element={}
-            ></Route>
+            <Route exact path="/movies" element={<Movies />}></Route>
             <Route
               path="/saved-movies"
               // element={
@@ -67,23 +64,14 @@ function App() {
               //    <ProtectedRouteElement />
               // }
             ></Route>
-            <Route
-              path="/"
-              element={
-                 <Main />
-              }
-            ></Route>
+            <Route path="/" element={<Main />}></Route>
           </Routes>
         </main>
         <Footer />
-        <Menu 
-          isOpen={isMenuOpen}
-          onClose={closeAllPopups}
-        />
+        <Menu isOpen={isMenuOpen} onClose={closeAllPopups} />
       </div>
     </div>
   );
 }
 
 export default App;
-

@@ -1,0 +1,7 @@
+.movies{
+    padding: 0 70px;
+    background-color: var(--background-color-grey);
+    width: 100vw;
+    max-width: calc(100vw - 2 * 70px);
+    flex: 1 0 auto;
+}
