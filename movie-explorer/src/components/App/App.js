@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRef } from 'react'
 import Header from '../Common/Header/Header';
 import Menu from '../Common/Header/Menu/Menu';
+import Footer from '../Common/Footer/Footer';
 import Main from '../Main/Main';
 
 function App() {
@@ -74,7 +75,7 @@ function App() {
             ></Route>
           </Routes>
         </main>
-        {/* <footer className="footer"></footer> <Footer></Footer> */}
+        <Footer />
         <Menu 
           isOpen={isMenuOpen}
           onClose={closeAllPopups}
