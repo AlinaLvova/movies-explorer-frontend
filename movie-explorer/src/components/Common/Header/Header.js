@@ -5,7 +5,6 @@ import Menu from "./Menu/Menu.js";
 import "./Header.css";
 import "../constant/common.css";
 import { MENU_ICON_SCREEN_WIDTH } from "../../../utils/constant.js"
-import logo from "../../../images/logo-header.svg";
 
 function Header(props) {
   const paths = ["/movies", "/saved-movies", "/profile"];
@@ -60,7 +59,7 @@ function Header(props) {
       className={`header-container header-container__color_${headerColor} ${headerDisplay}`}
     >
       <div className={`header ${headerAuth}`}>
-        <img className="header__logo" src={logo} alt="Логотип сайта." />
+        <a href="https://ya.ru/" className="header__logo link" alt="Логотип сайта с ссылкой на Яндекс." />
         <Routes>
           <Route
             exact
@@ -68,12 +67,12 @@ function Header(props) {
             element={
               <div className="header__auth">
                 <Link to="/signup">
-                  <button className="button-style header__signup-button">
+                  <button className="button-style header__signup-button link">
                     Регистрация
                   </button>
                 </Link>
                 <Link to="/signin">
-                  <button className="button-style header__signin-button">
+                  <button className="button-style header__signin-button link">
                     Войти
                   </button>
                 </Link>
