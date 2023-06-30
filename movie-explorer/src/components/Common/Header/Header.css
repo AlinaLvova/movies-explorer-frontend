@@ -5,6 +5,7 @@
     flex-direction: row;
     justify-content: center;
     border: none;
+    flex: 0 0 auto;
 }
 
 .header-container__color_landing {
