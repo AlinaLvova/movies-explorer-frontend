@@ -1,21 +1,21 @@
 .movies{
     padding: 0 70px;
     background-color: var(--background-color-grey);
-    width: 100vw;
-    max-width: calc(100vw - 2 * 70px);
+    /* max-width: 100%; */
+    max-width: calc(100% - 2 * 70px);
     flex: 1 0 auto;
 }
 
 @media screen and (max-width: 790px){
     .movies{
         padding: 0 30px;
-        max-width: calc(100vw - 2 * 30px);
+        max-width: calc(100% - 2 * 30px);
     }
 }
 
-@media screen and (max-width: 680px){
+@media screen and (max-width: 550px){
     .movies{
         padding: 0 10px;
-        max-width: calc(100vw - 2 * 10px);
+        max-width: calc(100% - 2 * 10px);
     }
 }

@@ -62,7 +62,7 @@
 }
 
 
-@media screen and (max-width: 621px) and (min-width: 320px) {
+@media screen and (max-width: 680px) and (min-width: 320px) {
     .portfolio__subtitle {
         font-size: 18px;
         line-height: 28px;

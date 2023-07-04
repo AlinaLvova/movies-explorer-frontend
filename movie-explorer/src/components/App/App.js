@@ -7,10 +7,17 @@ import Menu from "../Common/Header/Menu/Menu";
 import Footer from "../Common/Footer/Footer";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
+import movieList from "../../utils/movieList";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    setCards(movieList);
+  }, []);
 
   const handleOpenMenu = () => {
     setIsMenuOpen(true);
@@ -51,7 +58,11 @@ function App() {
               path="/profile"
               // element={}
             ></Route>
-            <Route exact path="/movies" element={<Movies />}></Route>
+            <Route
+              exact
+              path="/movies"
+              element={<Movies cards={cards} />}
+            ></Route>
             <Route
               path="/saved-movies"
               // element={

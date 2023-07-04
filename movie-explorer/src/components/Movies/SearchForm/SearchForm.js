@@ -30,7 +30,7 @@ function SearchForm() {
         >
           <div className="search-form__switcher-ball"></div>
         </button>
-        <div className="search-form__switcher-text">Короткометражка</div>
+        <div className="search-form__switcher-text">Короткометражки</div>
       </div>
     </section>
   );

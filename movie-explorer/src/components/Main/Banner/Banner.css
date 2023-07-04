@@ -4,6 +4,7 @@
     background-image: url(../../../images/logo-landing.svg);
     background-repeat: no-repeat;
     background-position: 50% 41%;
+    width: 100%;
 }
 
 .banner__header {

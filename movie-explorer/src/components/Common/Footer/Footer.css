@@ -1,7 +1,7 @@
 .footer {
     background-color: var(--background-color-grey);
     padding: 79px 70px 20px;
-    max-width: calc(100vw - 2*70px);
+    max-width: calc(100% - 2*70px);
     width: 100%;
 }
 
@@ -46,14 +46,14 @@
 
 @media screen and (max-width: 790px) {
     .footer {
-        max-width: calc(100vw - (2 * 30px));
+        max-width: calc(100% - (2 * 30px));
         padding: 79px 30px 20px;
     }
 }
 
 @media screen and (max-width: 550px) {
     .footer {
-        max-width: calc(100vw - (2 * 10px));
+        max-width: calc(100% - (2 * 10px));
         padding: 79px 10px 20px;
     }
 

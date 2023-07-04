@@ -11,9 +11,6 @@
     --text-color-grey: #A0A0A0;
     --line: #DADADA;
     --text-color-dark-grey: #8B8B8B;
-    --grey-line: #424242
-  }
-  
-  :root{
-    --section-max-width: 1140px;
+    --grey-line: #424242;
+    --background-color-movies-card: #222; 
   }
