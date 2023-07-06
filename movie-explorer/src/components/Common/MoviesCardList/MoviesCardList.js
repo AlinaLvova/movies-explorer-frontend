@@ -1,14 +1,26 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { useLocation } from "react-router-dom";
 
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
+import { MovieContext } from "../../../contexts/MovieContext";
 
-function MoviesCardList({ cards }) {
-  const startVisibleRows = 2;
+const calculateStartColumnsCount = () => {
+  if (window.innerWidth >= 1668) return 4;
+  if (window.innerWidth >= 1028) return 3;
+  if (window.innerWidth >= 610) return 2;
+  return 1;
+};
+
+function MoviesCardList({ cards, isExpanded, onRowsCounter, rows }) {
+  const { savedMovies, addMovie, removeMovie } = useContext(MovieContext);
+  const location = useLocation();
+
+  const startVisibleRows = rows;
   const gridRef = useRef(null);
-  const [columns, setColumns] = useState(0);
+  const [columns, setColumns] = useState(calculateStartColumnsCount());
 
-  const [cardCount, setCardCount] = useState(6);
+  const [cardCount, setCardCount] = useState(rows * columns);
 
   const calculateColumns = (cards) => {
     const gridElement = gridRef.current;
@@ -26,7 +38,13 @@ function MoviesCardList({ cards }) {
     }
   };
 
+  // useEffect(() => {
+  //   calculateColumns({cards});
+  // }, [location.pathname]);
+
   useEffect(() => {
+    calculateColumns({ cards });
+
     window.addEventListener("resize", calculateColumns);
 
     return () => {
@@ -40,6 +58,7 @@ function MoviesCardList({ cards }) {
 
   const loadMoreCards = () => {
     setCardCount(cardCount + columns);
+    onRowsCounter();
   };
 
   const visibleCards = cards.slice(0, cardCount);
@@ -53,6 +72,11 @@ function MoviesCardList({ cards }) {
             title={movie.title}
             duration={movie.duration}
             backdrop={movie.backdrop}
+            isSaved={savedMovies.some(
+              (savedMovie) => savedMovie.title === movie.title
+            )}
+            onAddToSaved={addMovie}
+            onRemoveFromSaved={removeMovie}
           />
         ))}
       </ul>

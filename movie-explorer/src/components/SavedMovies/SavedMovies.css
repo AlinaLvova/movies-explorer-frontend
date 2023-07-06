@@ -1,0 +1,21 @@
+.saved-movies {
+    padding: 0 70px;
+    background-color: var(--background-color-grey);
+    /* max-width: 100%; */
+    max-width: calc(100% - 2 * 70px);
+    flex: 1 0 auto;
+}
+
+@media screen and (max-width: 790px) {
+    .saved-movies {
+        padding: 0 30px;
+        max-width: calc(100% - 2 * 30px);
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .saved-movies {
+        padding: 0 10px;
+        max-width: calc(100% - 2 * 10px);
+    }
+}

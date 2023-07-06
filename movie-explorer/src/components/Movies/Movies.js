@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import './Movies.css';
-import SearchForm from './SearchForm/SearchForm';
-import MoviesCardList from './MoviesCardList/MoviesCardList';
+import "./Movies.css";
+import SearchForm from "./SearchForm/SearchForm";
+import MoviesCardList from "../Common/MoviesCardList/MoviesCardList";
 
-function Movies({cards}) {
+function Movies({ cards, onRowsCounter, rows }) {
   return (
     <div className="movies">
-    <SearchForm />
-    <MoviesCardList cards={cards}/>
+      <SearchForm />
+      <MoviesCardList 
+        cards={cards}
+        rows={rows}
+        onRowsCounter={onRowsCounter} />
     </div>
   );
 }
