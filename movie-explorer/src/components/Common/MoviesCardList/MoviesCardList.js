@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { useLocation } from "react-router-dom";
 
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import { MovieContext } from "../../../contexts/MovieContext";
+import { VisibleRowsContext } from "../../../contexts/VisibleRowsContext";
 
 const calculateStartColumnsCount = () => {
   if (window.innerWidth >= 1668) return 4;
@@ -12,35 +12,26 @@ const calculateStartColumnsCount = () => {
   return 1;
 };
 
-function MoviesCardList({ cards, isExpanded, onRowsCounter, rows }) {
+function MoviesCardList({ cards }) {
   const { savedMovies, addMovie, removeMovie } = useContext(MovieContext);
-  const location = useLocation();
+  const { addRows, getRows } = useContext(VisibleRowsContext);
 
-  const startVisibleRows = rows;
+  const startVisibleRows = getRows();
   const gridRef = useRef(null);
   const [columns, setColumns] = useState(calculateStartColumnsCount());
 
-  const [cardCount, setCardCount] = useState(rows * columns);
+  const [cardCount, setCardCount] = useState(startVisibleRows * columns);
 
   const calculateColumns = (cards) => {
-    const gridElement = gridRef.current;
-    if (gridElement && gridElement.firstElementChild) {
-      const gridWidth = gridElement.offsetWidth;
-      const itemWidth = gridElement.firstElementChild.offsetWidth;
-      const newColumns = Math.floor(gridWidth / itemWidth);
-      setColumns(newColumns);
-      const requiredCardCount = newColumns * startVisibleRows;
-      if (cards.length < requiredCardCount) {
-        setCardCount(cards.length);
-      } else {
-        setCardCount(requiredCardCount);
-      }
+    const newColumns = calculateStartColumnsCount();
+    setColumns(newColumns);
+    const requiredCardCount = columns * startVisibleRows;
+    if (cards.length < requiredCardCount) {
+      setCardCount(cards.length);
+    } else {
+      setCardCount(requiredCardCount);
     }
   };
-
-  // useEffect(() => {
-  //   calculateColumns({cards});
-  // }, [location.pathname]);
 
   useEffect(() => {
     calculateColumns({ cards });
@@ -58,7 +49,7 @@ function MoviesCardList({ cards, isExpanded, onRowsCounter, rows }) {
 
   const loadMoreCards = () => {
     setCardCount(cardCount + columns);
-    onRowsCounter();
+    addRows();
   };
 
   const visibleCards = cards.slice(0, cardCount);
