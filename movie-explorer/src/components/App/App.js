@@ -10,6 +10,7 @@ import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import movieList from "../../utils/movieList";
 import SavedMovies from "../SavedMovies/SavedMovies";
+import Register from "../Auth/Register/Register";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -22,6 +23,10 @@ function App() {
 
   const handleOpenMenu = () => {
     setIsMenuOpen(true);
+  };
+
+  const handleLogin = () => {
+    //setIsMenuOpen(true);
   };
 
   const closeAllPopups = () => {
@@ -54,7 +59,7 @@ function App() {
                 <Route
                   exact
                   path="/signup"
-                  // element={<Register onRegister={handleLogin} />}
+                  element={<Register onRegister={handleLogin} />}
                 ></Route>
                 <Route
                   exact
