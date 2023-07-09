@@ -11,6 +11,7 @@ import Movies from "../Movies/Movies";
 import movieList from "../../utils/movieList";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Register from "../Auth/Register/Register";
+import Login from "../Auth/Login/Login";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -54,7 +55,7 @@ function App() {
                 <Route
                   exact
                   path="/signin"
-                  // element={<Login onLogin={handleLogin} />}
+                  element={<Login onLogin={handleLogin} />}
                 ></Route>
                 <Route
                   exact
