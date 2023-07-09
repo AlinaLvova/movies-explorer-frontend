@@ -59,7 +59,7 @@ function Header(props) {
       className={`header-container header-container__color_${headerColor} ${headerDisplay}`}
     >
       <div className={`header ${headerAuth}`}>
-        <a href="https://ya.ru/" className="header__logo link" alt="Логотип сайта с ссылкой на Яндекс." />
+        <a href="https://ya.ru/"  target="_blank" className="header__logo link" alt="Логотип сайта с ссылкой на Яндекс." />
         <Routes>
           <Route
             exact
