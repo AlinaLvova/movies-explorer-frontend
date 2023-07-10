@@ -13,6 +13,7 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Register from "../Auth/Register/Register";
 import Login from "../Auth/Login/Login";
 import Profile from "../Auth/Profile/Profile";
+import NotFound from "../NotFound/NotFound";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -76,9 +77,9 @@ function App() {
                 <Route path="/saved-movies" element={<SavedMovies />}></Route>
                 <Route
                   path="/404"
-                  // element={
-                  //    <ProtectedRouteElement />
-                  // }
+                  element={
+                     <NotFound />
+                  }
                 ></Route>
                 <Route path="/" element={<Main />}></Route>
               </Routes>
