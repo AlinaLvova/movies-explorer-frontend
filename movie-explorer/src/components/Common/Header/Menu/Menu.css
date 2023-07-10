@@ -60,11 +60,15 @@
     text-decoration: none;
 }
 
+.menu__link.underlined {
+    text-decoration: underline !important;
+}
+
 .menu__link:hover {
     text-decoration: underline;
 }
 
-.menu__acсount{
+.menu__account{
     position: fixed;
     bottom: 90px;
 }

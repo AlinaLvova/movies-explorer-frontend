@@ -19,7 +19,7 @@
 }
 
 @media screen and (max-width: 550px){
-    .form__nav{
+    .form-nav{
         font-size: 12px;
         gap: 7px;
     }

@@ -4,21 +4,29 @@ import "./Login.css";
 import InputField from "../InputField/InputField";
 import SubmitButton from "../SubmitButton/SubmitButton";
 import FormNav from "../FormNav/FormNav";
+import Header from "../../Common/Header/Header";
 
 function Login() {
   return (
-    <section className="login">
-      <form className="login-form">
-        <InputField title={"E-mail"} type={"text"} />
-        <InputField title={"Пароль"} type={"password"} />
-        <SubmitButton title={"Войти"} />
-      </form>
-      <FormNav
-        questionTitle={"Ещё не зарегистрированы?"}
-        linkTitle={"Регистрация"}
-        linkTo={"/signup"}
-      />
-    </section>
+    <div className="page__container auth">
+      <Header />
+      <main className="content auth">
+        <section className="login">
+          <form className="login-form">
+            <InputField title={"E-mail"} type={"text"} />
+            <InputField title={"Пароль"} type={"password"} />
+            <div className="login-form__button">
+              <SubmitButton title={"Войти"} />
+            </div>
+          </form>
+          <FormNav
+            questionTitle={"Ещё не зарегистрированы?"}
+            linkTitle={"Регистрация"}
+            linkTo={"/signup"}
+          />
+        </section>
+      </main>
+    </div>
   );
 }
 

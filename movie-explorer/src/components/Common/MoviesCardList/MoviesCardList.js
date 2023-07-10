@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
@@ -17,7 +17,6 @@ function MoviesCardList({ cards }) {
   const { addRows, getRows } = useContext(VisibleRowsContext);
 
   const startVisibleRows = getRows();
-  const gridRef = useRef(null);
   const [columns, setColumns] = useState(calculateStartColumnsCount());
 
   const [cardCount, setCardCount] = useState(startVisibleRows * columns);
@@ -25,7 +24,7 @@ function MoviesCardList({ cards }) {
   const calculateColumns = (cards) => {
     const newColumns = calculateStartColumnsCount();
     setColumns(newColumns);
-    const requiredCardCount = columns * startVisibleRows;
+    const requiredCardCount = newColumns * startVisibleRows;
     if (cards.length < requiredCardCount) {
       setCardCount(cards.length);
     } else {
@@ -56,7 +55,7 @@ function MoviesCardList({ cards }) {
 
   return (
     <section className="movies-card-list">
-      <ul ref={gridRef} className="movies-card-list__container">
+      <ul className="movies-card-list__container">
         {visibleCards.map((movie, index) => (
           <MoviesCard
             key={index}

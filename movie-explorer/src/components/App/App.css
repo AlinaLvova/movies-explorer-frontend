@@ -21,6 +21,12 @@
   max-width: 100%;
 }
 
+.page__container.auth{
+  justify-content: center;
+  padding: 70px 0;
+  min-height: calc(100vh - 140px) !important;
+}
+
 .content{
   width: 100%;
   margin: 0;
@@ -28,4 +34,19 @@
   border: none;
   flex: 1 0 auto;
   display: flex;
+}
+
+.content.auth{
+  flex: 0 0 auto;
+}
+
+@media screen and (max-width: 500px) {
+  .page__container.auth{
+    justify-content: start;
+    padding: calc(56px - 18px) 0 30px;
+    min-height: calc(100vh - (30px + 56px - 18px)) !important;
+  }
+  .content.auth{
+    flex: 1 0 auto;
+  }
 }

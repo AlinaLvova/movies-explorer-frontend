@@ -5,12 +5,9 @@ import usePopupClose from "../../../../hooks/usePopupClose";
 import ProfileButton from '../ProfileButton/ProfileButton';
 
 import React, { useState } from "react";
-import { Routes, Route, Link, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Menu({isOpen, onClose}) {
-  // const [isOpen, setIsOpen] = useState(false);
-  // const [showOpenButton, setShowOpenButton] = useState(true);
-
   const handleCloseMenu = () => {
 
   };
@@ -20,8 +17,6 @@ function Menu({isOpen, onClose}) {
 
   return (
     <div className={`popup ${isOpen ? "popup_opened" : ""}`}>
-      {/* <div className={`popup popup_opened}`}> */}
-      {/* <menu className={`menu open`}> */}
       <menu className={`menu ${isOpen ? "open" : ""}`}>
         {isOpen && (
           <div className="menu__container">
@@ -30,17 +25,17 @@ function Menu({isOpen, onClose}) {
               onClick={onClose}
             />
             <div className="menu__content">
-              <Link to="/" className="menu__link link">
+              <NavLink to="/" className={({ isActive }) =>`menu__link link ${isActive && 'underlined'}`}>
                 Главная
-              </Link>
-              <Link to="/movies" className="menu__link link">
+              </NavLink>
+              <NavLink to="/movies" className={({ isActive }) =>`menu__link link ${isActive && 'underlined'}`}>
                 Фильмы
-              </Link>
-              <Link to="/saved-movies" className="menu__link link">
+              </NavLink>
+              <NavLink to="/saved-movies" className={({ isActive }) =>`menu__link link ${isActive && 'underlined'}`}>
                 Сохранённые фильмы
-              </Link>
+              </NavLink>
             </div>
-            <div className="menu__acсount">
+            <div className="menu__account">
               <ProfileButton/>
             </div>
           </div>

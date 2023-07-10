@@ -1,7 +1,7 @@
 import "./ProfileButton.css";
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
-import '../../constant/common.css';
+import { Link } from "react-router-dom";
+import "../../constant/common.css";
 
 function ProfileButton() {
   return (

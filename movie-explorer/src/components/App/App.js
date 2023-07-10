@@ -3,9 +3,8 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { MovieProvider } from "../../contexts/MovieContext";
 import { VisibleRowsProvider } from "../../contexts/VisibleRowsContext";
-import Header from "../Common/Header/Header";
+
 import Menu from "../Common/Header/Menu/Menu";
-import Footer from "../Common/Footer/Footer";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import movieList from "../../utils/movieList";
@@ -16,7 +15,7 @@ import Profile from "../Auth/Profile/Profile";
 import NotFound from "../NotFound/NotFound";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [cards, setCards] = useState([]);
 
@@ -38,57 +37,59 @@ function App() {
 
   return (
     <div className="page">
-      <div className="page__container">
-        <MovieProvider>
-          <VisibleRowsProvider>
-            <Header onClickMenuButton={handleOpenMenu}></Header>
-            <main className="content">
-              <Routes>
-                <Route
-                  path="*"
-                  element={
-                    loggedIn ? (
-                      <Navigate to="/movies" replace />
-                    ) : (
-                      <Navigate to="/" replace />
-                    )
-                  }
-                ></Route>
-                <Route
-                  exact
-                  path="/signin"
-                  element={<Login onLogin={handleLogin} />}
-                ></Route>
-                <Route
-                  exact
-                  path="/signup"
-                  element={<Register onRegister={handleLogin} />}
-                ></Route>
-                <Route
-                  exact
-                  path="/profile"
-                  element={<Profile onProfile={handleLogin} name={"Алина"} email={"malina@malina.com"} />}
-                ></Route>
-                <Route
-                  exact
-                  path="/movies"
-                  element={<Movies cards={cards} />}
-                ></Route>
-                <Route path="/saved-movies" element={<SavedMovies />}></Route>
-                <Route
-                  path="/404"
-                  element={
-                     <NotFound />
-                  }
-                ></Route>
-                <Route path="/" element={<Main />}></Route>
-              </Routes>
-            </main>
-            <Footer />
-            <Menu isOpen={isMenuOpen} onClose={closeAllPopups} />
-          </VisibleRowsProvider>
-        </MovieProvider>
-      </div>
+      <MovieProvider>
+        <VisibleRowsProvider>
+          <Routes>
+            <Route
+              path="*"
+              element={
+                loggedIn ? (
+                  <Navigate to="/movies" replace />
+                ) : (
+                  <Navigate to="/" replace />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/signin"
+              element={<Login onLogin={handleLogin} />}
+            />
+            <Route
+              exact
+              path="/signup"
+              element={<Register onRegister={handleLogin} />}
+            />
+            <Route
+              exact
+              path="/profile"
+              element={
+                <Profile
+                  onProfile={handleLogin}
+                  name={"Алина"}
+                  email={"malina@malina.com"}
+                  onMenuButtonClick={handleOpenMenu}
+                />
+              }
+            />
+            <Route
+              exact
+              path="/movies"
+              element={
+                <Movies cards={cards} onMenuButtonClick={handleOpenMenu} />
+              }
+            />
+            <Route
+              exact
+              path="/saved-movies"
+              element={<SavedMovies onMenuButtonClick={handleOpenMenu} />}
+            />
+            <Route exact path="/404" element={<NotFound />} />
+            <Route exact path="/" element={<Main />} />
+          </Routes>
+          <Menu isOpen={isMenuOpen} onClose={closeAllPopups} />
+        </VisibleRowsProvider>
+      </MovieProvider>
     </div>
   );
 }
