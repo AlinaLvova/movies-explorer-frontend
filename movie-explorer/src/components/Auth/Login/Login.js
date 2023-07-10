@@ -13,8 +13,8 @@ function Login() {
       <main className="content auth">
         <section className="login">
           <form className="login-form">
-            <InputField title={"E-mail"} type={"text"} />
-            <InputField title={"Пароль"} type={"password"} />
+            <InputField title={"E-mail"} type={"text"} placeholder={"E-mail"}/>
+            <InputField title={"Пароль"} type={"password"} placeholder={"Пароль"}/>
             <div className="login-form__button">
               <SubmitButton title={"Войти"} />
             </div>

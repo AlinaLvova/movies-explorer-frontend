@@ -13,9 +13,9 @@ function Register() {
       <main className="content auth">
         <section className="register">
           <form className="register-form">
-            <InputField title={"Имя"} type={"text"} />
-            <InputField title={"E-mail"} type={"text"} />
-            <InputField title={"Пароль"} type={"password"} />
+            <InputField title={"Имя"} type={"text"} placeholder={"Имя"}/>
+            <InputField title={"E-mail"} type={"text"} placeholder={"E-mail"}/>
+            <InputField title={"Пароль"} type={"password"} placeholder={"Пароль"}/>
             <div className="register-form__button">
               <SubmitButton title={"Зарегистрироваться"} />
             </div>
