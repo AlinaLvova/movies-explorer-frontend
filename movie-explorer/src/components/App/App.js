@@ -12,6 +12,7 @@ import movieList from "../../utils/movieList";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Register from "../Auth/Register/Register";
 import Login from "../Auth/Login/Login";
+import Profile from "../Auth/Profile/Profile";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -65,7 +66,7 @@ function App() {
                 <Route
                   exact
                   path="/profile"
-                  // element={}
+                  element={<Profile onProfile={handleLogin} name={"Алина"} email={"malina@malina.com"} />}
                 ></Route>
                 <Route
                   exact
