@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 import "./MoviesCard.css";
 import { MovieContext } from "../../../contexts/MovieContext";
@@ -12,7 +12,8 @@ function MoviesCard({ title, duration, backdrop, isSaved }) {
     location.pathname === "/saved-movies"
   );
 
-  function handleClick() {
+  function handleClick(event) {
+    event.preventDefault();
     if (favourites) {
       removeMovie(title);
     } else {
@@ -41,33 +42,44 @@ function MoviesCard({ title, duration, backdrop, isSaved }) {
   }
 
   return (
-    <div className="movies-card">
-      <div className="movies-card__container">
-        <div className="movies-card__title">{title}</div>
-        <div className="movies-card__duration">{formatDuration(duration)}</div>
-      </div>
-      <img
-        className="movies-card__backdrop"
-        src={backdrop}
-        alt={`Кадр из фильма: ${title}`}
-      />
-      {!isFavoritesRoute && (
-        <button
-          className={`movies-card__favorites-btn link ${
-            favourites ? "active" : ""
-          }`}
-          type="button"
-          onClick={handleClick}
-        ></button>
-      )}
-      {isFavoritesRoute && (
-        <button
-          className={`movies-card__favorites-btn link remove-btn`}
-          type="button"
-          onClick={handleRemoveMovie}
-        ></button>
-      )}
-    </div>
+    <li className="movies-card">
+      <Link
+        className="movies-card__link"
+        to={"https://www.youtube.com/watch?v=osmzwWw4RYM"}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <div className="movies-card__container">
+          <div className="movies-card__wrapper">
+            <h3 className="movies-card__title">{title}</h3>
+            <h4 className="movies-card__duration">
+              {formatDuration(duration)}
+            </h4>
+          </div>
+          {!isFavoritesRoute && (
+            <button
+              className={`movies-card__favorites-btn link ${
+                favourites ? "active" : ""
+              }`}
+              type="button"
+              onClick={handleClick}
+            ></button>
+          )}
+          {isFavoritesRoute && (
+            <button
+              className={`movies-card__favorites-btn link remove-btn`}
+              type="button"
+              onClick={handleRemoveMovie}
+            ></button>
+          )}
+        </div>
+        <img
+          className="movies-card__backdrop"
+          src={backdrop}
+          alt={`Кадр из фильма: ${title}`}
+        />
+      </Link>
+    </li>
   );
 }
 

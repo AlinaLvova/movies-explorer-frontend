@@ -1,18 +1,25 @@
 .search-form {
-    padding: 70px 0;
+    padding: 85px 0 70px;
     display: flex;
     flex-direction: row;
 }
 
 .search-form__container {
     display: flex;
-    background-color: var(--background-color-light-grey-f);
-    border-radius: 9px 0 0 9px;
     flex-direction: row;
     flex-grow: 1;
     align-items: center;
     justify-content: space-between;
-    height: 72px;
+    padding: 0 0;
+    border-right: 1px solid var(--line);
+}
+
+.search-form__search-container{
+    background-color: var(--background-color-light-grey-f);
+    display: flex;
+    width: 100%;
+    padding: 19px 0 19px 15px;
+    border-radius: 9px 0 0 9px;
 }
 
 .search-form__search-icon {
@@ -31,25 +38,23 @@
     background-color: transparent;
     border: none;
     font-size: 18px;
-    font-family: Inter;
+    font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
-    outline: none;
     padding: 0;
 }
 
 .search-form__search-btn {
     width: 60px;
     height: 34px;
-    margin: 0 0 0 20px;
+    margin: 0 30px 0 20px;
     padding: 0;
-    border: none;
     border-radius: 48px;
     background-color: var(--button-color-blue);
     text-align: center;
     font-size: 11px;
-    font-family: Inter;
+    font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: 500;
     line-height: 18px;
@@ -71,61 +76,42 @@
     justify-content: space-between;
     flex-direction: row;
     background-color: var(--background-color-light-grey-f);
-    width: calc(197px);
-    padding: 0 30px 0 0;
+    /* width: calc(197px + 2 * 19px); */
+    padding: 23px 30px 19px;
+    margin: 0;
     flex-grow: 0;
     border-radius: 0 9px 9px 0;
+    gap: 15px;
 }
+
 
 .search-form__switcher-text {
     font-size: 13px;
-    font-family: Inter;
+    font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: 400;
     line-height: 18px;
-}
-
-.search-form__switcher {
-    width: 34px;
-    height: 14px;
-    background-color: var(--button-color-green);
-    border-radius: 50px;
-    padding: 2px;
+    padding: 0;
     margin: 0;
-    transition: all 0.4s ease-out;
-    opacity: 0.2;
-    border: none;
-}
-
-.search-form__switcher:hover {
-    cursor: pointer;
-}
-
-.search-form__switcher-ball {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: var(--text-color-white);
-    transition: all 0.4s ease-out;
-}
-
-.search-form__switcher.active .search-form__switcher-ball {
-    transform: translateX(20px);
-}
-
-.search-form__switcher.active {
-    opacity: 1;
 }
 
 @media screen and (max-width: 790px) {
     .search-form {
-        padding: 80px 0 109px;
+        padding: 97px 0 109px;
+    }
+    .search-form__switcher-container {
+        padding: 12px 21px 9px;
+        margin: 0;
+    }
+
+    .search-form__search-btn {
+        margin: 0 20px 0;
     }
 }
 
 @media screen and (max-width: 690px) {
     .search-form {
-        padding: 80px 0 45px;
+        padding: 100px 0 45px;
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
@@ -149,11 +135,9 @@
     .search-form__container {
         flex-grow: 0;
         width: 100%;
-        border-radius: 9px;
-        padding: 0 19px;
+        border: none;
+        padding: 0 19px 0 0;
         box-sizing: border-box;
-        height: 72px;
-
     }
 
     .search-form__switcher-text {
@@ -164,25 +148,23 @@
         flex-grow: 0;
         flex-shrink: 1;
         width: 58.65px;
+        margin: 0;
     }
 
     .search-form__input-field {
         flex-shrink: 1;
         flex-grow: 0;
         max-width: calc(100% - 58.65px - 34px);
+        font-size: 14px;
     }
 
     .search-form__search-icon {
         display: none;
     }
 
-    .search-form__switcher {
-        width: 39px;
-        height: 19px;
+    .search-form__search-container{
+        border-radius: 9px;
+        width: 98%;
     }
 
-    .search-form__switcher-ball {
-        width: 15px;
-        height: 15px;
-    }
 }

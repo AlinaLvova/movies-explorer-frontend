@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import "./Footer.css";
 
@@ -10,26 +11,41 @@ function Footer() {
       setYear(new Date().getFullYear());
     }, 1000 * 60 * 60 * 24); // Обновляем год каждые 24 часа
     return () => clearInterval(interval);
-    
   }, []);
 
   return (
-    <section className="footer">
-      <h3 className="footer__subtitle">
+    <footer className="footer">
+      <p className="footer__subtitle">
         Учебный проект Яндекс.Практикум х BeatFilm.
-      </h3>
+      </p>
       <div className="footer__container">
         <p className="footer__text">&#169; {year}</p>
-        <div className="footer__links">
-          <a href="https://practicum.yandex.ru/" rel="noreferrer" target="_blank" className="footer__text link">
-            Яндекс.Практикум
-          </a>
-          <a href="https://github.com/AlinaLvova" rel="noreferrer" target="_blank" className="footer__text link">
-            Github
-          </a>
-        </div>
+        <ul className="footer__links">
+          <li>
+            <Link
+              to={"https://practicum.yandex.ru/"}
+              className="footer__link"
+              rel="noreferrer"
+              target="_blank"
+              className="footer__text link"
+            >
+              Яндекс.Практикум
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={"https://github.com/AlinaLvova"}
+              className="footer__link"
+              rel="noreferrer"
+              target="_blank"
+              className="footer__text link"
+            >
+              Github
+            </Link>
+          </li>
+        </ul>
       </div>
-    </section>
+    </footer>
   );
 }
 

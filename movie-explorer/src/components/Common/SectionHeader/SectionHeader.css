@@ -1,6 +1,6 @@
 .section-header {
-    font-size: 18px;
-    font-family: Inter;
+    font-size: 22px;
+    font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
     font-weight: 400;
     letter-spacing: -0.72px;
     border-bottom: 1px solid var(--line);
@@ -17,6 +17,7 @@
 
 @media screen and (max-width: 680px) and (min-width: 320px) {
     .section-header {
+        padding-bottom: 30px;
         font-size: 18px;
         letter-spacing: -0.72px;
     }

@@ -5,7 +5,7 @@
     justify-content: center;
 }
 
-.nav__list {
+.navtab__list {
     display: flex;
     flex-direction: row;
     padding: 0;
@@ -16,9 +16,10 @@
     list-style: none;
 }
 
-.nav__element {
+.navtab__element {
     font-size: 13px;
-    font-family: Inter;
+    font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
+
     font-weight: 500;
     line-height: 16px;
     text-decoration-line: underline;
@@ -28,10 +29,10 @@
 
 
 @media screen and (max-width: 500px) and (min-width: 320px) {
-    .nav__element {
+    .navtab__element {
         font-size: 11px;
     }
-    .nav__list{
+    .navtab__list{
         width: 214px;
     }
 }

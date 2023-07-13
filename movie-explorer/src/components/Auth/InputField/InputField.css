@@ -13,7 +13,7 @@
 
 .input-field__title{
     color: var(--text-color-dark-grey);
-    font-family: Inter;
+    font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
     padding-bottom: 10px;
 }
 
@@ -23,11 +23,15 @@
     background: var(--background-color-light-grey-f);
     border: none;
     color: var(--text-color-white);
-    font-family: Inter;
+    font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+}
+
+.input-field__input:focus{
+    outline: 1px solid var(--grey-line);
 }
 
 .input-field__input.active{
@@ -42,11 +46,6 @@
 
 .input-field__error-message.active{
     display: block;
-}
-
-.input-field__input:focus
-{
-  outline: none;
 }
 
 @media screen and (max-width: 550px){

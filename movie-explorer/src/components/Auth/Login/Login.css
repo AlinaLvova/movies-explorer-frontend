@@ -3,20 +3,18 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    flex: 0 0 auto;
     align-items: center;
     gap: 16px;
-    padding-bottom: 18px;
+    flex-grow: 1;
 }
 
 .login-form{
     width: 100%;
     display: flex;
     flex-direction: column;
-    /* flex: 0 0 auto; */
+    flex: 1 0 auto;
     align-items: center;
     gap: 20px;
-    min-height: 384px;
 }
 
 .login-form__button{
@@ -29,5 +27,8 @@
 @media screen and (max-width: 500px) {  
     .login-form{
       flex: 1 0 auto;
+    }
+    .login{
+        padding-top: 80px;
     }
 }

@@ -5,7 +5,7 @@ import './InputField.css';
 function InputField({title, type, placeholder}) {
   return (
     <div className="input-field">
-      <div className="input-field__title input-field__text">{title}</div>
+      <label className="input-field__title input-field__text">{title}</label>
       <input
         type={type}
         className="input-field__input"
@@ -14,7 +14,7 @@ function InputField({title, type, placeholder}) {
         maxLength="30"
         required
       />
-      <div className="input-field__error-message input-field__text">sdsdsd</div>
+      <span className="input-field__error-message input-field__text">{}</span>
     </div>
   );
 }

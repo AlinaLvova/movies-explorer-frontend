@@ -46,41 +46,31 @@ function Header({ onClickMenuButton }) {
   };
 
   return (
-    <section
-      className={`header-container header-container__color_${headerColor} ${headerDisplay}`}
+    <header
+      className={`header-container header-container_color-${headerColor} ${headerDisplay}`}
     >
       <div className={`header ${headerAuth}`}>
-        <a
-          href="https://ya.ru/"
-          target="_blank"
-          aria-label="Логотип сайта с ссылкой на Яндекс."
-          rel="noreferrer"
+        <Link to={"/"}
           className="header__logo link"
-          alt="Логотип сайта с ссылкой на Яндекс."
-        >
-          {}
-        </a>
+        />
         {location.pathname === "/" ? (
           <div className="header__auth">
-            <Link to="/signup">
-              <button className="button-style header__signup-button link">
+            <Link to="/signup" className="button-style header__signup-button link">
                 Регистрация
-              </button>
             </Link>
-            <Link to="/signin">
-              <button className="button-style header__signin-button link">
+            <Link to="/signin" className="button-style header__signin-button link">
                 Войти
-              </button>
             </Link>
           </div>
         ) : location.pathname === "/signin" ? (
-          <div className="header__welcome-container">Рады видеть!</div>
+          <h1 className="header__welcome-container">Рады видеть!</h1>
         ) : location.pathname === "/signup" ? (
-          <div className="header__welcome-container">Добро пожаловать!</div>
+          <h1 className="header__welcome-container">Добро пожаловать!</h1>
         ) : (
           <>
             {width < MENU_ICON_SCREEN_WIDTH ? (
               <button
+                type="button"
                 className="header__menu-button button-style link"
                 onClick={handleOpenMenu}
               ></button>
@@ -90,7 +80,7 @@ function Header({ onClickMenuButton }) {
           </>
         )}
       </div>
-    </section>
+    </header>
   );
 }
 

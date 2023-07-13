@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import imageOfMe from "../../../images/me1.jpg";
 import "./AboutMe.css";
 import SectionHeader from "../../Common/SectionHeader/SectionHeader";
@@ -11,12 +12,12 @@ function AboutMe() {
       <div className="about-me__wrapper">
         <img
           src={imageOfMe}
-          className="about-me__imageOfMe"
+          className="about-me__image-of-me"
           alt="Мой портрерт."
         />
         <div className="about-me__info">
-          <h1 className="about-me__title">Алина</h1>
-          <h4 className="about-me__subtitle">Фронтенд-разработчик</h4>
+          <h2 className="about-me__title">Алина</h2>
+          <p className="about-me__subtitle">Фронтенд-разработчик</p>
           <p className="about-me__description">
             Я родилась под Нижним Новгородом, закончила Нижегородский
             государственный университет. Я люблю слушать аудиокниги, а ещё
@@ -25,12 +26,12 @@ function AboutMe() {
             была связана с контроллерами. Я решила сменить фокус в своей работе
             и начать углубляться в область разработки сайтов.
           </p>
-          <a
-            href="https://github.com/alinalvova"
-            className="about-me__githubLink link"
+          <Link 
+            to={"https://github.com/alinalvova"}
+            className="about-me__github-link link"
           >
             Github
-          </a>
+          </Link>
         </div>
       </div>
       <Portfolio />

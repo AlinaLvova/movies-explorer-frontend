@@ -11,14 +11,31 @@
     justify-content: space-between;
 }
 
+.movies-card__link{
+    color: var(--text-color-white);
+    text-decoration: none;
+}
+
 .movies-card__container{
     padding: 14px;
     margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.movies-card__wrapper{
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
 }
 
 .movies-card__title{
+    margin: 0;
     font-size: 15px;
-    font-family: Inter;
+    font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -26,7 +43,6 @@
     text-overflow: ellipsis;
     max-width: 30ch;
     width: 85%;
-    max-height: 18px;
     display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
@@ -36,25 +52,26 @@
     padding-top: 11px;
     color: var(--text-color-dark-grey);
     font-size: 11px;
-    font-family: Inter;
+    font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    margin: 0;
 }
 
 .movies-card__backdrop{
     width: 100%;
     margin: 0;
     padding: 0;
-    object-fit: contain;
+    object-fit: cover;
+    background-position: center center;
+    background-size: contain;
     box-sizing: content-box;
     object-position: 0 0;
+    height: 203px;
 }
 
 .movies-card__favorites-btn{
-    position: absolute;
-    top: 19px;
-    right: 15px;
     background-image: url(../../../images/fav-disabled-btn.svg);
     background-size: 100% 100%;
     width: 30px;
@@ -64,7 +81,6 @@
     box-sizing: border-box;
 }
 
-
 .movies-card__favorites-btn.remove-btn{
     background-image: url(../../../images/remove-favourite-btn.svg);
 }
@@ -73,3 +89,14 @@
     background-image: url(../../../images/fav-active-btn.svg);
 }
 
+@media screen and (max-width: 790px) {
+    .movies-card__backdrop{
+        height: 190px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .movies-card__backdrop{
+        height: 168px;
+    }
+}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import "./Portfolio.css";
 
@@ -8,16 +9,13 @@ function Portfolio() {
       <h3 className="portfolio__title">Портфолио</h3>
       <ul className="portfolio__links">
         <li className="portfolio__link-wrapper">
-          <h2 className="portfolio__subtitle">Статичный сайт</h2>
-          <a target="_blank" rel="noreferrer" href="https://alinalvova.github.io/how-to-learn/index.html" className="portfolio__link portfolio__subtitle link">↗</a>
+          <Link target="_blank" rel="noreferrer" to={"https://alinalvova.github.io/how-to-learn/index.html"} className="portfolio__link portfolio__subtitle link">Статичный сайт</Link>
         </li>
         <li className="portfolio__link-wrapper">
-          <h2 className="portfolio__subtitle">Адаптивный сайт</h2>
-          <a target="_blank" rel="noreferrer" href="https://alinalvova.github.io/russian-travel/" className="portfolio__link portfolio__subtitle link">↗</a>
+          <Link target="_blank" rel="noreferrer" to={"https://alinalvova.github.io/russian-travel/"} className="portfolio__link portfolio__subtitle link">Адаптивный сайт</Link>
         </li>
         <li className="portfolio__link-wrapper">
-          <h2 className="portfolio__subtitle">Одностраничное приложение</h2>
-          <a target="_blank" rel="noreferrer" href="https://malina.nomoredomains.rocks/sign-in" className="portfolio__link portfolio__subtitle link">↗</a>
+          <Link target="_blank" rel="noreferrer" to={"https://malina.nomoredomains.rocks/sign-in"} className="portfolio__link portfolio__subtitle link">Одностраничное приложение</Link>
         </li>
       </ul>
     </section>

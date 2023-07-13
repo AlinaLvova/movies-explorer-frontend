@@ -4,11 +4,12 @@
     position: fixed;
     top: 0;
     right: 0;
-    width: calc(61.5vw);
+    width: calc(68vw);
     height: 100%;
     background-color: var(--background-color-grey);
     transform: translateX(100%);
     transition: transform 0.4s ease-in-out;
+    max-width: 100vw;
 }
 
 .menu.open {
@@ -31,41 +32,55 @@
     align-items: center;
 
 }
+
 .menu__close-button {
     position: fixed;
     right: 22px;
     top: 22px;
-    background-image: url(../../../../images/close-menu-button.svg);
+    background-image: url(../../../../images/close-menu-button.svg) !important;
     background-size: contain;
-    width: 22px;
-    height: 22px;
-
+    background-position: 50% 50%;
+    background: transparent;
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    margin: 0;
 }
+
 .menu__content {
+    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding-top: 159px;
-    height: 122px;
-
+    padding: 159px 0 0;
+    gap: 23px;
+    list-style: none;
+    box-sizing: border-box;
 }
 
 .menu__link {
     color: #FFF;
     text-align: center;
     font-size: 18px;
-    font-family: Inter;
+    font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
+    padding: 0 0 4px;
     font-weight: 500;
     text-decoration: none;
+    box-sizing: border-box;
+    line-height: normal;
 }
 
-.menu__link.underlined {
-    text-decoration: underline !important;
+.menu__li{
+    padding: 0 0 4px;
 }
 
-.menu__link:hover {
-    text-decoration: underline;
+.menu__link.active{
+    border-bottom: 2px solid var(--text-color-white) !important;
+}
+
+.menu__link:hover{
+    border-bottom: 2px solid var(--text-color-white) !important;
 }
 
 .menu__account{
@@ -77,7 +92,17 @@
     .menu{
         width: 100%;
     }
-    .menu__acount{
-        bottom: 46px;
+    .menu__account{
+        bottom: 48px;
+    }
+    .menu__container{
+        max-width: 100vw;
+    }
+    .menu__content{
+        padding: 145px 0 0;
+        gap: 19px;
+    }
+    .menu__close-button {
+        top: 13px;
     }
 }

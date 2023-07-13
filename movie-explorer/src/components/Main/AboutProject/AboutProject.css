@@ -11,8 +11,6 @@
     padding: 0;
     list-style: none;
     grid-template-columns: 1fr 1fr;
-
-
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-between;
@@ -24,17 +22,20 @@
 }
 
 .about-project__subtitle {
-    font-size: 18px;
-    font-family: Inter;
+    font-size: 20px;
+    font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
     letter-spacing: -0.72px;
     width: 100%;
     font-weight: 400;
+    margin: 0;
 }
 
 .about-project__description {
-    font-size: 11px;
-    font-family: Inter;
-    line-height: 16px;
+    font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
     width: calc(400 / 550 * 100%);
     margin-top: 26px;
     margin-bottom: 110px;
@@ -44,15 +45,13 @@
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 4fr;
-
 }
 
 .about-project__timeline-bar {
     text-align: center;
-    font-size: 11px;
-    font-family: Inter;
+    font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
     padding: 9px 14px;
-    margin-bottom: 14px;
+    margin: 0 0 14px;
 }
 
 .about-project__timeline-bar_green {
@@ -67,10 +66,11 @@
 .about-project__caption {
     text-align: center;
     font-size: 14px;
-    font-family: Inter;
+    font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
     font-weight: 500;
     line-height: 17px;
     color: var(--text-color-grey);
+    margin: 0;
 }
 
 @media screen and (max-width: 1279px) and (min-width: 791px) {}
@@ -81,12 +81,12 @@
     }
 
     .about-project__table {
-        gap: 0px;
+        gap: 28px;
     }
 
     .about-project__description {
         width: 97%;
-        margin-bottom: 96px;
+        margin-bottom: 91px;
         font-size: 12px;
         line-height: 18px;
     }
@@ -98,7 +98,7 @@
 
     .about-project__caption {
         font-size: 14px;
-        font-family: Suisse Intl;
+        font-family: Suisse Intl, Arial, Helvetica, sans-serif;
         line-height: 17px;
     }
 
@@ -107,7 +107,7 @@
     }
 
     .about-project__timeline-bar {
-        padding: 9px 10px;
+        padding: 8px 10px;
     }
 }
 
@@ -123,7 +123,7 @@
     .about-project__description {
         margin-top: 16px;
         width: 100%;
-        margin-bottom: 56px;
+        margin-bottom: 30px;
         font-size: 11px;
         line-height: 16px;
     }
@@ -144,5 +144,14 @@
 
     .about-project__table {
         margin-top: 60px;
+        margin-bottom: 32px;
+    }
+
+    .about-project__caption {
+        font-size: 11px;
+    }
+    
+    .about-project__timeline-bar {
+        margin-bottom: 10px;
     }
 }

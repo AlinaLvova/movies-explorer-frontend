@@ -13,4 +13,8 @@
     --text-color-dark-grey: #8B8B8B;
     --grey-line: #424242;
     --background-color-movies-card: #222; 
+    --background-disabled-switcher: #EBEBEB;
+    --background-active-switcher: #3DDC84;
+    --disabled-switcher-ball: #F5F5F5;
+    --active-switcher-ball: #FFFFFF;
   }

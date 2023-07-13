@@ -72,6 +72,7 @@ function MoviesCardList({ cards }) {
       </ul>
       {cardCount < cards.length && (
         <button
+          type="button"
           className="movies-card-list__button link"
           onClick={loadMoreCards}
         >

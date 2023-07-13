@@ -1,16 +1,20 @@
 .submit-button {
     width: 396px;
-    height: 45px;
+    padding: 15px 0;
     border-radius: 3px;
     background: var(--button-color-blue);
-    margin-top: 69px;
     color: var(--text-color-white);
     text-align: center;
-    font-family: Inter;
+    font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+}
+
+.submit-button.submit-button_inactive{
+    background-color: #F8F8F8;
+    color: #C2C2C2;
 }
 
 @media screen and (max-width: 550px){

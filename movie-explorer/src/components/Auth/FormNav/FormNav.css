@@ -3,7 +3,7 @@
     flex-direction: row;
     gap: 6px;
     text-align: center;
-    font-family: Inter;
+    font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
