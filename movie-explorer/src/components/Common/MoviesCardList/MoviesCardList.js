@@ -54,7 +54,7 @@ function MoviesCardList({ cards }) {
   const visibleCards = cards.slice(0, cardCount);
 
   return (
-    <section className="movies-card-list">
+    <section className={`movies-card-list ${cardCount < cards.length ? "" : "movies-card-list_padding"}`}>
       <ul className="movies-card-list__container">
         {visibleCards.map((movie, index) => (
           <MoviesCard

@@ -153,5 +153,7 @@
     
     .about-project__timeline-bar {
         margin-bottom: 10px;
+        font-size: 11px;
+        padding: 11px;
     }
 }

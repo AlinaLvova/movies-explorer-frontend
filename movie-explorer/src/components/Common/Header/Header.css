@@ -24,7 +24,8 @@
     align-items: center;
     padding-bottom: 18px;
     padding: 0 70px 0;
-    gap: 46px;
+    gap: 40px; 
+    /* dont touch gap */
 }
 
 
@@ -70,7 +71,7 @@
 
 .header__welcome-container {
     margin: 0;
-    padding-top: 40px;
+    /* padding-top: 40px; */
     width: 100%;
     font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
     font-style: normal;
@@ -149,7 +150,7 @@
     .header__auth{
         width: 132px;
     }
-    .header__welcome-container{
-        padding-top: 50px;
+    .header__welcome-container {
+        padding-top: 10px;
     }
 }
