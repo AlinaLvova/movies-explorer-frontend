@@ -103,9 +103,6 @@
 }
 
 @media screen and (max-width: 768px) {
-    .profile {
-        padding: 255px 0 265px;
-    }
     .profile__data-container {
         padding-top: calc(0.091 * 100vh);
         /* padding-bottom: calc(0.2 * 100vh); */
@@ -113,9 +110,7 @@
 }
 
 @media screen and (max-width: 500px) {
-    .profile {
-        padding: 86px 0 40px;
-    }
+   
     .profile__data-container {
         padding-top: calc(0.105 * 100vh);
         /* padding-bottom: 0; */

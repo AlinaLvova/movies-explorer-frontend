@@ -21,7 +21,7 @@ function Header({ onClickMenuButton }) {
   useEffect(() => {
     setHeaderAuth(
       location.pathname === "/signup" || location.pathname === "/signin"
-        ? "header__container-auth"
+        ? "header_auth"
         : ""
     );
   }, [location.pathname]);

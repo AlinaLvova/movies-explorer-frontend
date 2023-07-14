@@ -8,7 +8,7 @@ import Header from "../../Common/Header/Header";
 
 function Register() {
   return (
-    <div className="page__container auth">
+    <div className="page__container page__container-auth">
       <Header />
       <main className="content auth">
         <section className="register">

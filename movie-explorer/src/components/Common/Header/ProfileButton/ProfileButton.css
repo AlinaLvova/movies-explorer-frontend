@@ -1,4 +1,4 @@
-.profile__container {
+.profile-btn {
     background: transparent;
     border-style: none;
     display: flex;
@@ -11,7 +11,7 @@
     padding: 0;
 }
 
-.profile__link {
+.profile-btn__link {
     font-size: 13px;
     font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
     font-weight: 500;

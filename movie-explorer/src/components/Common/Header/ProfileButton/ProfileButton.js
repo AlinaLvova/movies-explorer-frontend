@@ -5,8 +5,8 @@ import "../../constant/common.css";
 
 function ProfileButton() {
   return (
-    <div className="profile__container button-style">
-      <Link to="/profile" className="profile__link link">
+    <div className="profile-btn button-style">
+      <Link to="/profile" className="profile-btn__link link">
         Аккаунт
       </Link>
     </div>
