@@ -37,6 +37,9 @@ function Profile({ name, email, onMenuButtonClick }) {
                 type="text"
                 className="profile__input"
                 onChange={handleNameChange}
+                placeholder="Имя"
+                minLength="2"
+                maxLength="30"
               />
             </div>
             <div className="profile__data-row">
@@ -46,6 +49,7 @@ function Profile({ name, email, onMenuButtonClick }) {
                 type="email" 
                 className="profile__input"
                 onChange={handleEmailChange}
+                placeholder="Email"
               />
             </div>
             {updateButton && (
