@@ -14,13 +14,13 @@ function Main() {
     <div className="page__container">
       <Header />
       <main className="content">
-        <section className="main">
+        {/* <section className="main"> */}
           <Banner />
           <NavTab />
           <AboutProject />
           <Techs />
           <AboutMe />
-        </section>
+        {/* </section> */}
       </main>
       <Footer />
     </div>
