@@ -16,7 +16,7 @@ function AboutMe() {
           alt="Мой портрерт."
         />
         <div className="about-me__info">
-          <h2 className="about-me__title">Алина</h2>
+          <h3 className="about-me__title">Алина</h3>
           <p className="about-me__subtitle">Фронтенд-разработчик</p>
           <p className="about-me__description">
             Я родилась под Нижним Новгородом, закончила Нижегородский

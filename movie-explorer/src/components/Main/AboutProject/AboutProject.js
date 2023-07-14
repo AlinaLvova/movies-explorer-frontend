@@ -9,18 +9,18 @@ function AboutProject() {
       <SectionHeader headerTitle={"О проекте"} />
       <ul className="about-project__table">
         <li className="about-project__container">
-          <p className="about-project__subtitle">
+          <h3 className="about-project__subtitle">
             Дипломный проект включал 5 этапов
-          </p>
+          </h3>
           <p className="about-project__description">
             Составление плана, работу над бэкендом, вёрстку, добавление
             функциональности и финальные доработки.
           </p>
         </li>
         <li className="about-project__container">
-          <p className="about-project__subtitle">
+          <h3 className="about-project__subtitle">
             На выполнение диплома ушло 5 недель
-          </p>
+          </h3>
           <p className="about-project__description">
             У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было
             соблюдать, чтобы успешно защититься.
