@@ -4,7 +4,7 @@ import './SubmitButton.css';
 
 function SubmitButton({title, onClick, inActive}) {
   const handleClick = () => {
-    // onclick();
+    onClick();
   };
 
   return (

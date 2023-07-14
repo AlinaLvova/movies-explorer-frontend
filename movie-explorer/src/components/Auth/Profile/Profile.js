@@ -6,8 +6,12 @@ import SubmitButton from "../../Auth/SubmitButton/SubmitButton";
 import "./Profile.css";
 
 function Profile({ name, email, onMenuButtonClick }) {
-  const [updateButton, setUpdateButton] = useState(false);
+  const [updateButton, setUpdateButton] = useState(true);
   const errorMessage = "При обновлении профиля произошла ошибка.";
+
+  const handleUpdateButtonClick = () =>{
+    setUpdateButton(!updateButton);
+  }
 
   return (
     <div className="page__container">
@@ -27,7 +31,7 @@ function Profile({ name, email, onMenuButtonClick }) {
           </form>
           {!updateButton && (
             <div className="profile__update-container">
-              <button className="profile__update-btn link" type="button">
+              <button className="profile__update-btn link" type="button" onClick={handleUpdateButtonClick}>
                 Редактировать
               </button>
               <button className="profile__logout button-style link" type="button">
@@ -38,7 +42,7 @@ function Profile({ name, email, onMenuButtonClick }) {
           {updateButton && (
             <div className="profile__update-container">
               <span className="profile__span-update">{errorMessage}</span>
-              <SubmitButton title="Сохранить" inActive={false}/>
+              <SubmitButton title="Сохранить" inActive={true} onClick={handleUpdateButtonClick}/>
             </div>
           )}
         </section>
