@@ -29,6 +29,8 @@ function AboutMe() {
           <Link 
             to={"https://github.com/alinalvova"}
             className="about-me__github-link link"
+            target="_blank"
+            rel="noreferrer"
           >
             Github
           </Link>
