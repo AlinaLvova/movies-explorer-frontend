@@ -6,12 +6,22 @@ import SubmitButton from "../../Auth/SubmitButton/SubmitButton";
 import "./Profile.css";
 
 function Profile({ name, email, onMenuButtonClick }) {
+  const [updatedName, setUpdatedName] = useState(name);
+  const [updatedEmail, setUpdatedEmail] = useState(email);
   const [updateButton, setUpdateButton] = useState(true);
   const errorMessage = "При обновлении профиля произошла ошибка.";
 
-  const handleUpdateButtonClick = () =>{
+  const handleUpdateButtonClick = () => {
     setUpdateButton(!updateButton);
-  }
+  };
+
+  const handleNameChange = (event) => {
+    setUpdatedName(event.target.value);
+  };
+
+  const handleEmailChange = (event) => {
+    setUpdatedEmail(event.target.value);
+  };
 
   return (
     <div className="page__container">
@@ -22,27 +32,48 @@ function Profile({ name, email, onMenuButtonClick }) {
           <form className="profile__data-container">
             <div className="profile__data-row">
               <label className="profile__label">Имя</label>
-              <input value={name} type="text" className="profile__input" />
+              <input
+                value={updatedName}
+                type="text"
+                className="profile__input"
+                onChange={handleNameChange}
+              />
             </div>
             <div className="profile__data-row">
               <label className="profile__label">E-mail</label>
-              <input value={email} type="email" className="profile__input" />
+              <input 
+                value={updatedEmail} 
+                type="email" 
+                className="profile__input"
+                onChange={handleEmailChange}
+              />
             </div>
+            {updateButton && (
+              <div className="profile__update-container">
+                <span className="profile__span-update">{errorMessage}</span>
+                <SubmitButton
+                  title="Сохранить"
+                  inActive={true}
+                  onClick={handleUpdateButtonClick}
+                />
+              </div>
+            )}
           </form>
           {!updateButton && (
             <div className="profile__update-container">
-              <button className="profile__update-btn link" type="button" onClick={handleUpdateButtonClick}>
+              <button
+                className="profile__update-btn link"
+                type="button"
+                onClick={handleUpdateButtonClick}
+              >
                 Редактировать
               </button>
-              <button className="profile__logout button-style link" type="button">
+              <button
+                className="profile__logout button-style link"
+                type="button"
+              >
                 Выйти из аккаунта
               </button>
-            </div>
-          )}
-          {updateButton && (
-            <div className="profile__update-container">
-              <span className="profile__span-update">{errorMessage}</span>
-              <SubmitButton title="Сохранить" inActive={true} onClick={handleUpdateButtonClick}/>
             </div>
           )}
         </section>

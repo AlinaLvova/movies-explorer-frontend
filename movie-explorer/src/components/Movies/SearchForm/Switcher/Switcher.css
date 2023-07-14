@@ -13,6 +13,10 @@
     height: 0;
 }
 
+.switcher:focus-within .switcher__slider {
+    outline: 1.5px solid var(--button-color-blue); /* Замените "blue" на нужный вам цвет рамки */
+}
+
 /* The slider */
 .switcher__slider {
     position: absolute;

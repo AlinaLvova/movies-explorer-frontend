@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import './SubmitButton.css';
+import "./SubmitButton.css";
 
-function SubmitButton({title, onClick, inActive}) {
+function SubmitButton({ title, onClick, inActive }) {
   const handleClick = () => {
     onClick();
   };
 
   return (
-    <button onClick={handleClick} type='submit' className={`submit-button link ${inActive ? "submit-button_inactive" : ""}`}>{title}</button>
+    <button
+      onClick={handleClick}
+      type="submit"
+      className={`submit-button link ${
+        inActive ? "submit-button_inactive" : ""
+      }`}
+    >
+      {title}
+    </button>
   );
 }
 

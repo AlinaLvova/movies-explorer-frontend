@@ -12,8 +12,8 @@ function SearchForm() {
 
   return (
     <section className="search-form">
-      <div className="search-form__search-container">
-      <div className="search-form__container">
+      <form className="search-form__search-container">
+        <div className="search-form__container">
           <div className="search-form__search-icon"></div>
           <input
             className="search-form__input-field"
@@ -25,12 +25,11 @@ function SearchForm() {
             Найти
           </button>
         </div>
-      </div>
-      {/* <div className="search-form__delimeter"></div> */}
-      <div className="search-form__switcher-container">
-        <Switcher onChecked={handleCheckboxChange} isChecked={isChecked} />
-        <h4 className="search-form__switcher-text">Короткометражки</h4>
-      </div>
+        <div className="search-form__switcher-container">
+          <Switcher onChecked={handleCheckboxChange} isChecked={isChecked} />
+          <span className="search-form__switcher-text">Короткометражки</span>
+        </div>
+      </form>
     </section>
   );
 }

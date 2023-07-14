@@ -51,10 +51,10 @@ function MoviesCard({ title, duration, backdrop, isSaved }) {
       >
         <div className="movies-card__container">
           <div className="movies-card__wrapper">
-            <h3 className="movies-card__title">{title}</h3>
-            <h4 className="movies-card__duration">
+            <h2 className="movies-card__title">{title}</h2>
+            <span className="movies-card__duration">
               {formatDuration(duration)}
-            </h4>
+            </span>
           </div>
           {!isFavoritesRoute && (
             <button
