@@ -1,0 +1,20 @@
+:root {
+    --background-color-grey: #202020;
+    --background-color-blue: #073042;
+    --background-color-light-grey: #272727;
+    --background-color-light-grey-f: #2F2F2F;
+    --button-color-green: #3DDC84;
+    --button-color-grey: #303030;
+    --button-color-blue: #4285F4;
+    --text-color-white: #FFFFFF;
+    --text-color-red: #EE3465;
+    --text-color-grey: #A0A0A0;
+    --line: #DADADA;
+    --text-color-dark-grey: #8B8B8B;
+    --grey-line: #424242;
+    --background-color-movies-card: #222; 
+    --background-disabled-switcher: #EBEBEB;
+    --background-active-switcher: #3DDC84;
+    --disabled-switcher-ball: #F5F5F5;
+    --active-switcher-ball: #FFFFFF;
+  }

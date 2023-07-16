@@ -1,0 +1,26 @@
+.form-nav {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    text-align: center;
+    font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.form-nav__question{
+    color: var(--text-color-dark-grey);
+}
+
+.form-nav__link{
+    color: var(--button-color-blue);
+}
+
+@media screen and (max-width: 550px){
+    .form-nav{
+        font-size: 12px;
+        gap: 7px;
+    }
+}

@@ -1,0 +1,34 @@
+.profile-btn {
+    background: transparent;
+    border-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 86px;
+    margin: 0;
+    border: none;
+    padding: 0;
+}
+
+.profile-btn__link {
+    font-size: 13px;
+    font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    line-height: 12px;
+    background-image: url(../../../../images/logo-account.svg);
+    height: 27px;
+    width: 100px;
+    color: var(--text-color-white);
+    background-repeat: no-repeat;
+    background-position: 99% 50%;
+    background-size: 27px 27px;
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* align-items: center; */
+    padding-top: 9%;
+    box-sizing: border-box;
+    border: none;
+    object-fit: cover;
+    margin: 0;
+}

@@ -1,0 +1,31 @@
+.header__buttons-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 0 0 0 8px;
+}
+
+.header__nav-links-container {
+    display: flex;
+    font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    gap: 16px;
+}
+
+.header__nav-links_weight {
+    font-weight: 500;
+}
+
+.header__nav-links {
+    color: var(--text-color-white);
+}
+
+.header__saved-movies {
+    color: var(--text-color-white);
+}
+

@@ -1,0 +1,59 @@
+.input-field{
+    width: 396px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-field__text{
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.input-field__title{
+    color: var(--text-color-dark-grey);
+    font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
+    padding-bottom: 10px;
+}
+
+.input-field__input{
+    padding: 15px;
+    border-radius: 8px;
+    background: var(--background-color-light-grey-f);
+    border: none;
+    color: var(--text-color-white);
+    font-family: "Inter", "Suisse-Intl", Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.input-field__input:focus{
+    outline: 1px solid var(--grey-line);
+}
+
+.input-field__input.active{
+    color: var( --text-color-red);
+}
+
+.input-field__error-message{
+    display: none;
+    color: var( --text-color-red);
+    padding-top: 10px;
+}
+
+.input-field__error-message.active{
+    display: block;
+}
+
+@media screen and (max-width: 550px){
+    .input-field__error-message{
+        font-size: 13px;
+        font-weight: 500;
+    }
+    .input-field{
+        width: 260px;
+    }
+}

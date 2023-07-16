@@ -1,0 +1,49 @@
+.button-style{
+    background: transparent;
+    border: none;
+}
+
+.link{
+    transition: opacity 0.3s ease-in-out;
+    cursor: pointer;
+    border-style: none !important;
+    text-decoration: none;
+}
+
+.link:hover{
+    opacity: 0.6;
+}
+
+.link:visited {
+  }
+
+
+.popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 100;
+    overflow: auto;
+    display: flex;
+    transition: all 0.5s ease;
+    visibility: hidden;
+    opacity: 0;
+    align-items: center;
+    justify-content: space-around;
+    transition: all 0.5s ease;
+    max-width: 100vw;
+}
+
+.popup_opened{
+    transition: all 0.5s ease;
+    opacity: 1;
+    visibility: visible;
+}
+
+.content{
+    margin: 0;
+    padding: 0;
+}
