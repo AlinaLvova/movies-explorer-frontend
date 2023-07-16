@@ -14,13 +14,20 @@ import Login from "../Auth/Login/Login";
 import Profile from "../Auth/Profile/Profile";
 import NotFound from "../NotFound/NotFound";
 
+import getAllMovies from "../../utils/MoviesApi";
+
 function App() {
   const [loggedIn, setLoggedIn] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    setCards(movieList);
+    getAllMovies().then((data) =>{
+      console.log(data);
+      setCards(data);
+      console.log(data[0].image.formats.thumbnail.url);
+    })
+    
   }, []);
 
   const handleOpenMenu = () => {

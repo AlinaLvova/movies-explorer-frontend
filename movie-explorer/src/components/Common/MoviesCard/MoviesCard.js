@@ -4,7 +4,7 @@ import { useLocation, Link } from "react-router-dom";
 import "./MoviesCard.css";
 import { MovieContext } from "../../../contexts/MovieContext";
 
-function MoviesCard({ title, duration, backdrop, isSaved }) {
+function MoviesCard({ title, duration, backdrop, isSaved, trailerLink }) {
   const [favourites, setFavourites] = useState(isSaved);
   const { addMovie, removeMovie } = useContext(MovieContext);
   const location = useLocation();
@@ -45,7 +45,7 @@ function MoviesCard({ title, duration, backdrop, isSaved }) {
     <li className="movies-card">
       <Link
         className="movies-card__link"
-        to={"https://www.youtube.com/watch?v=osmzwWw4RYM"}
+        to={trailerLink}
         target="_blank"
         rel="noreferrer"
       >

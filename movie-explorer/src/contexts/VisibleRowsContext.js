@@ -4,8 +4,8 @@ import { useLocation } from "react-router-dom";
 export const VisibleRowsContext = createContext();
 
 export const VisibleRowsProvider = ({ children }) => {
-  const [visibleRows, setVisibleRows] = useState(2);
-  const [visibleRowsSaved, setVisibleRowsSaved] = useState(2);
+  const [visibleRows, setVisibleRows] = useState(0);
+  const [visibleRowsSaved, setVisibleRowsSaved] = useState(0);
   const location = useLocation();
   const [prevPathname, setPrevPathname] = useState("");
 

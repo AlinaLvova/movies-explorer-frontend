@@ -5,11 +5,11 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import { MovieContext } from "../../../contexts/MovieContext";
 import { VisibleRowsContext } from "../../../contexts/VisibleRowsContext";
 
-const calculateStartColumnsCount = () => {
-  if (window.innerWidth >= 1668) return 4;
-  if (window.innerWidth >= 1028) return 3;
-  if (window.innerWidth >= 610) return 2;
-  return 1;
+const calculateStartColumnsAndRowsCount = () => {
+  if (window.innerWidth >= 1668) return {columns: 4, rows: 3};
+  if (window.innerWidth >= 1028) return {columns: 3, rows: 4};
+  if (window.innerWidth >= 610) return {columns: 2, rows: 4};
+  return {columns: 1, rows: 5};
 };
 
 function MoviesCardList({ cards }) {
@@ -17,14 +17,15 @@ function MoviesCardList({ cards }) {
   const { addRows, getRows } = useContext(VisibleRowsContext);
 
   const startVisibleRows = getRows();
-  const [columns, setColumns] = useState(calculateStartColumnsCount());
+  const [columns, setColumns] = useState(calculateStartColumnsAndRowsCount().columns);
 
   const [cardCount, setCardCount] = useState(startVisibleRows * columns);
 
   const calculateColumns = (cards) => {
-    const newColumns = calculateStartColumnsCount();
+    const newColumns = calculateStartColumnsAndRowsCount().columns;
+    const newRows = calculateStartColumnsAndRowsCount().rows;
     setColumns(newColumns);
-    const requiredCardCount = newColumns * startVisibleRows;
+    const requiredCardCount = newColumns * newRows;
     if (cards.length < requiredCardCount) {
       setCardCount(cards.length);
     } else {
@@ -47,7 +48,7 @@ function MoviesCardList({ cards }) {
   // }, [cards.length]);
 
   const loadMoreCards = () => {
-    setCardCount(cardCount + columns);
+    setCardCount(cardCount + (columns === 1 ? (columns + 1) : columns));
     addRows();
   };
 
@@ -59,14 +60,15 @@ function MoviesCardList({ cards }) {
         {visibleCards.map((movie, index) => (
           <MoviesCard
             key={index}
-            title={movie.title}
+            title={movie.nameRU}
             duration={movie.duration}
-            backdrop={movie.backdrop}
+            backdrop={["https://api.nomoreparties.co/", movie.image.formats.thumbnail.url].join('')}
             isSaved={savedMovies.some(
               (savedMovie) => savedMovie.title === movie.title
             )}
             onAddToSaved={addMovie}
             onRemoveFromSaved={removeMovie}
+            trailerLink={movie.trailerLink}
           />
         ))}
       </ul>
