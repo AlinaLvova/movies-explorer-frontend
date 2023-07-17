@@ -17,7 +17,7 @@ function SavedMovies({ onRowsCounter, rows, onMenuButtonClick }) {
         <section className="saved-movies">
           <SearchForm />
           <MoviesCardList
-            cards={savedMovies}
+            moviesList={savedMovies}
             rows={rows}
             onRowsCounter={onRowsCounter}
             onRemoveFromSaved={removeMovie}

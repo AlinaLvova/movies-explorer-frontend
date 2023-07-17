@@ -12,7 +12,7 @@ const calculateStartColumnsAndRowsCount = () => {
   return {columns: 1, rows: 5};
 };
 
-function MoviesCardList({ cards }) {
+function MoviesCardList({ moviesList, isActive }) {
   const { savedMovies, addMovie, removeMovie } = useContext(MovieContext);
   const { addRows, getRows } = useContext(VisibleRowsContext);
 
@@ -21,20 +21,20 @@ function MoviesCardList({ cards }) {
 
   const [cardCount, setCardCount] = useState(startVisibleRows * columns);
 
-  const calculateColumns = (cards) => {
+  const calculateColumns = (moviesList) => {
     const newColumns = calculateStartColumnsAndRowsCount().columns;
     const newRows = calculateStartColumnsAndRowsCount().rows;
     setColumns(newColumns);
     const requiredCardCount = newColumns * newRows;
-    if (cards.length < requiredCardCount) {
-      setCardCount(cards.length);
+    if (moviesList.length < requiredCardCount) {
+      setCardCount(moviesList.length);
     } else {
       setCardCount(requiredCardCount);
     }
   };
 
   useEffect(() => {
-    calculateColumns({ cards });
+    calculateColumns({ moviesList });
 
     window.addEventListener("resize", calculateColumns);
 
@@ -44,20 +44,21 @@ function MoviesCardList({ cards }) {
   }, []);
 
   // useEffect(() => {
-  //   calculateColumns(cards);
-  // }, [cards.length]);
+  //   calculateColumns(moviesList);
+  // }, [moviesList.length]);
 
   const loadMoreCards = () => {
     setCardCount(cardCount + (columns === 1 ? (columns + 1) : columns));
     addRows();
   };
 
-  const visibleCards = cards.slice(0, cardCount);
+  const visibleCards = moviesList.slice(0, cardCount);
 
   return (
-    <section className={`movies-card-list ${cardCount < cards.length ? "" : "movies-card-list_padding"}`}>
+    <section className={`movies-card-list ${cardCount < moviesList.length ? "" : "movies-card-list_padding"} ${isActive ? "disabled" : ""}`}>
       <ul className="movies-card-list__container">
-        {visibleCards.map((movie, index) => (
+        {visibleCards.length > 0 &&
+          visibleCards.map((movie, index) => (
           <MoviesCard
             key={index}
             title={movie.nameRU}
@@ -72,7 +73,7 @@ function MoviesCardList({ cards }) {
           />
         ))}
       </ul>
-      {cardCount < cards.length && (
+      {cardCount < moviesList.length && (
         <button
           type="button"
           className="movies-card-list__button link"
