@@ -106,6 +106,6 @@ const apiConfig = {
     }
   }
 
-const api = new Api(apiConfig);
+const mainApi = new Api(apiConfig);
 
-export default api;
+export default mainApi;

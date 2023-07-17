@@ -19,11 +19,14 @@ import Register from "../Auth/Register/Register";
 import Login from "../Auth/Login/Login";
 import Profile from "../Auth/Profile/Profile";
 import NotFound from "../NotFound/NotFound";
+import ProtectedRouteElement from "../ProtectedRoute/ProtectedRoute";
 
 import getAllMovies from "../../utils/MoviesApi";
+import mainApi from "../../utils/MainApi";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   // const [moviesList, setMoviesList] = useState([]);
@@ -32,7 +35,9 @@ function App() {
   const { isActivePreloader, setStatePreloader } = useContext(PreloaderContext);
   const { searchTerm, setSearchTerm } = useContext(SearchContext);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    handleCheckToken();
+  }, []);
 
   const handleOpenMenu = () => {
     setIsMenuOpen(true);
@@ -45,6 +50,27 @@ function App() {
   const closeAllPopups = () => {
     setIsMenuOpen(false);
   };
+
+  // проверка токена и получение данных пользователя
+  function handleCheckToken() {
+    const jwt = localStorage.getItem("token");
+
+    if (jwt) {
+      // отправить запрос на сервер
+      mainApi
+        .getUserData(jwt)
+        .then((userData) => {
+          setLoggedIn(true);
+          // userData - объект с полями {id, name, email}
+          setCurrentUser(userData);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {});
+    } else {
+    }
+  }
 
   function findMovieByTitle(storedMovies) {
     let sortedMovies = storedMovies.filter((movie) =>
@@ -83,8 +109,8 @@ function App() {
 
     if (sortedMovies.length === 0) {
       setErrorMessage(ERROR_MESSAGE_NOT_FOUND);
-    }else{
-      setErrorMessage('');
+    } else {
+      setErrorMessage("");
     }
 
     addMovieList(sortedMovies);
@@ -158,7 +184,9 @@ function App() {
             exact
             path="/profile"
             element={
-              <Profile
+              <ProtectedRouteElement
+                element={Profile}
+                loggedIn={loggedIn}
                 onProfile={handleLogin}
                 name={"Алина"}
                 email={"malina@malina.com"}
@@ -170,12 +198,14 @@ function App() {
             exact
             path="/movies"
             element={
-              <Movies
+              <ProtectedRouteElement
+                element={Movies}
                 moviesList={moviesList}
                 onMenuButtonClick={handleOpenMenu}
                 onSearch={handleSearch}
                 errorMessage={errorMessage}
                 setErrorMessage={setErrorMessage}
+                loggedIn={loggedIn}
               />
             }
           />
@@ -183,12 +213,15 @@ function App() {
             exact
             path="/saved-movies"
             element={
-              <SavedMovies
+              <ProtectedRouteElement
+                element={SavedMovies}
+                loggedIn={loggedIn}
                 onMenuButtonClick={handleOpenMenu}
                 errorMessage={errorMessage}
               />
             }
           />
+
           <Route exact path="/404" element={<NotFound />} />
           <Route exact path="/" element={<Main />} />
         </Routes>
