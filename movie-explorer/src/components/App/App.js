@@ -209,8 +209,8 @@ function App() {
                 element={Profile}
                 loggedIn={loggedIn}
                 onProfile={handleLogin}
-                name={"Алина"}
-                email={"malina@malina.com"}
+                name={currentUser.name}
+                email={currentUser.email}
                 onMenuButtonClick={handleOpenMenu}
               />
             }
