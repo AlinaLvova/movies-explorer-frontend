@@ -47,6 +47,14 @@ function App() {
     //setIsMenuOpen(true);
   };
 
+  const handleSetLoggedIn = (value) => {
+    setLoggedIn(value);
+  };
+
+  const handleSetCurrentUser = (user) => {
+    setCurrentUser(user);
+  };
+
   const closeAllPopups = () => {
     setIsMenuOpen(false);
   };
@@ -54,11 +62,12 @@ function App() {
   // проверка токена и получение данных пользователя
   function handleCheckToken() {
     const jwt = localStorage.getItem("token");
+    console.log("token===", jwt);
 
     if (jwt) {
       // отправить запрос на сервер
       mainApi
-        .getUserData(jwt)
+        .getUserInfo(jwt)
         .then((userData) => {
           setLoggedIn(true);
           // userData - объект с полями {id, name, email}
@@ -173,12 +182,24 @@ function App() {
           <Route
             exact
             path="/signin"
-            element={<Login onLogin={handleLogin} />}
+            element={
+              <Login
+                loggedIn={loggedIn}
+                setLoggedIn={handleSetLoggedIn}
+                setCurrentUser={handleSetCurrentUser}
+              />
+            }
           />
           <Route
             exact
             path="/signup"
-            element={<Register onRegister={handleLogin} />}
+            element={
+              <Register
+                loggedIn={loggedIn}
+                setLoggedIn={handleSetLoggedIn}
+                setCurrentUser={handleSetCurrentUser}
+              />
+            }
           />
           <Route
             exact

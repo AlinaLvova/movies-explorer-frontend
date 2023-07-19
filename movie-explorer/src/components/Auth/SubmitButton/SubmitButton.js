@@ -2,18 +2,19 @@ import React, { useState } from "react";
 
 import "./SubmitButton.css";
 
-function SubmitButton({ title, onClick, inActive }) {
+function SubmitButton({ title, onClick, isActive }) {
   const handleClick = () => {
-    onClick();
+    //onClick();
   };
 
   return (
     <button
-      onClick={handleClick}
+      //onClick={handleClick}
       type="submit"
       className={`submit-button link ${
-        inActive ? "submit-button_inactive" : ""
+        !isActive ? "submit-button_inactive" : ""
       }`}
+      disabled={!isActive}
     >
       {title}
     </button>
