@@ -49,7 +49,6 @@ function Profile({ name, email, onMenuButtonClick, setLoggedIn, setCurrentUser }
     }
 
     const isEmailValid = emailRegex.test(emailInput.value);
-    console.log(isEmailValid);
     if(!isEmailValid){
       setErrorMessage("Пожалуйста, укажите корректный email в формате 'xxx@xx.xx', где xxx может содержать буквы, цифры, а также символы подчеркивания, тире и точки, а xx представляет доменное имя, состоящее из двух или трех букв, например, com, net, org, co.uk и т.д");
     }

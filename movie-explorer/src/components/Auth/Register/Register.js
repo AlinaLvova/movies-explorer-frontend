@@ -82,7 +82,6 @@ function Register(props) {
     mainApi
       .register(dataForm)
       .then((data) => {
-        console.log(data);
         mainApi
           .login({ email: dataForm.email, password: dataForm.password })
           .then((data) => {
@@ -102,8 +101,6 @@ function Register(props) {
           });
       })
       .catch((err) => {
-        console.log(err);
-        console.log(err.status, err.errorMessage);
         if (err.status === 409 && err.message === 'Пользователь с таким email уже зарегистрирован'){
           setErrorMessages((messages) => ({
             ...messages,

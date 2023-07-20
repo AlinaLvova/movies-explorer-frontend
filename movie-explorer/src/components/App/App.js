@@ -111,8 +111,6 @@ function App() {
 
     sortedMovies = findMovieByTitle(storedMovies);
 
-    console.log(isCheckedSwitcher);
-
     if (isCheckedSwitcher) {
       sortedMovies = findMovieByDuration(sortedMovies);
     }

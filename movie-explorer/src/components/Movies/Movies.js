@@ -12,7 +12,6 @@ function Movies({ moviesList, onMenuButtonClick, onSearch, errorMessage, setErro
   const {isActivePreloader, setStatePreloader} = useContext(PreloaderContext);
 
   function handleSearch(value){
-    console.log('movies', value);
     onSearch(value);
   }
 

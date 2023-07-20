@@ -114,7 +114,6 @@ class Api {
 
   // Зарегистрироваться
   register(userData) {
-    console.log("userdata from fetch", userData);
     return fetch(`${this.baseUrl}/signup`, {
       headers: this.headers,
       method: "POST",
