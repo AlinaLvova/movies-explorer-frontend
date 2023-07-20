@@ -75,7 +75,10 @@ function Profile({ name, email, onMenuButtonClick, setLoggedIn, setCurrentUser }
         setCurrentUser({name: response.name, email: response.email});
         setUpdateButton(false);
       })
-      .catch((error) => console.log(error.message));
+      .catch((error) => {
+        setErrorMessage(error.message);
+        setisDisabledInputField(false);
+      });
   }
 
   function handleSubmitUpdateProfile(event) {
