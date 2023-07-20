@@ -10,16 +10,14 @@ import mainApi from "../../../utils/MainApi";
 
 function Register(props) {
   const navigate = useNavigate();
-
   const { setLoggedIn, setCurrentUser } = props;
-
   const [dataForm, setDataForm] = useState({
     name: "",
     email: "",
     password: "",
   });
   const [isActiveInputField, setIsActiveInputField] = useState(true);
-  const [errorMessage, setErrorMessage] = useState({
+  const [errorMessages, setErrorMessages] = useState({
     name: "",
     email: "",
     password: "",
@@ -40,7 +38,7 @@ function Register(props) {
     // Check if any field value is empty
     const hasEmptyField = Object.values(dataForm).some((value) => value === "");
     // Check if any error message is not empty
-    const hasError = Object.values(errorMessage).some(
+    const hasError = Object.values(errorMessages).some(
       (message) => message !== ""
     );
     // Set the isActiveSubmitButton state accordingly
@@ -63,8 +61,8 @@ function Register(props) {
       }
     }
 
-    setErrorMessage((errorMessages) => ({
-      ...errorMessages,
+    setErrorMessages((messages) => ({
+      ...messages,
       [formElement.id]: errorMessage,
     }));
   }
@@ -107,8 +105,8 @@ function Register(props) {
         console.log(err);
         console.log(err.status, err.errorMessage);
         if (err.status === 409 && err.message === 'Пользователь с таким email уже зарегистрирован'){
-          setErrorMessage((errorMessages) => ({
-            ...errorMessages,
+          setErrorMessages((messages) => ({
+            ...messages,
             ["email"]: err.message,
           }));
         }
@@ -117,7 +115,7 @@ function Register(props) {
 
   useEffect(() => {
     checkActivateSubmitButton();
-  }, [dataForm, errorMessage]);
+  }, [dataForm, errorMessages]);
 
   useEffect(() => {
     if (props.loggedIn) {
@@ -145,7 +143,7 @@ function Register(props) {
               placeholder="Имя"
               minLength="2"
               maxLength="30"
-              errorMessage={errorMessage.name}
+              errorMessage={errorMessages.name}
               disabled={!isActiveInputField}
               value={dataForm.name || ""}
               onChange={handleChangeRegister}
@@ -155,7 +153,7 @@ function Register(props) {
               title="E-mail"
               type="text"
               placeholder="E-mail"
-              errorMessage={errorMessage.email}
+              errorMessage={errorMessages.email}
               disabled={!isActiveInputField}
               value={dataForm.email || ""}
               onChange={handleChangeRegister}
@@ -165,7 +163,7 @@ function Register(props) {
               title="Пароль"
               type="password"
               placeholder="Пароль"
-              errorMessage={errorMessage.password}
+              errorMessage={errorMessages.password}
               disabled={!isActiveInputField}
               value={dataForm.password || ""}
               onChange={handleChangeRegister}

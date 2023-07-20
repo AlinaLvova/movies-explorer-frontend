@@ -77,13 +77,18 @@ class Api {
   }
 
   //обновление данных о пользователе на сервере
-  updateUserInfo(name, email) {
+  updateUserInfo(data) {
+    const token = localStorage.getItem('token');
+
     return fetch(`${this.baseUrl}/users/me`, {
-      headers: this.headers,
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
       method: "PATCH",
       body: JSON.stringify({
-        name: name,
-        email: email,
+        name: data.name,
+        email: data.email,
       }),
     }).then((response) => {
       return this._handleResponse(

@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { MovieProvider, MovieContext } from "../../contexts/MovieContext";
 import { VisibleRowsProvider } from "../../contexts/VisibleRowsContext";
@@ -25,6 +25,7 @@ import getAllMovies from "../../utils/MoviesApi";
 import mainApi from "../../utils/MainApi";
 
 function App() {
+  const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,22 +63,22 @@ function App() {
   // проверка токена и получение данных пользователя
   function handleCheckToken() {
     const jwt = localStorage.getItem("token");
-    console.log("token===", jwt);
 
     if (jwt) {
-      // отправить запрос на сервер
       mainApi
         .getUserInfo(jwt)
         .then((userData) => {
-          setLoggedIn(true);
-          // userData - объект с полями {id, name, email}
           setCurrentUser(userData);
+          setLoggedIn(true);
         })
         .catch((error) => {
           console.log(error);
         })
-        .finally(() => {});
+        .finally(() => {
+        });
     } else {
+      setLoggedIn(false);
+
     }
   }
 
@@ -170,12 +171,12 @@ function App() {
       <VisibleRowsProvider>
         <Routes>
           <Route
-            path="*"
+            path="/"
             element={
               loggedIn ? (
                 <Navigate to="/movies" replace />
               ) : (
-                <Navigate to="/" replace />
+                <Main />
               )
             }
           />
@@ -212,6 +213,8 @@ function App() {
                 name={currentUser.name}
                 email={currentUser.email}
                 onMenuButtonClick={handleOpenMenu}
+                setLoggedIn={handleSetLoggedIn}
+                setCurrentUser={handleSetCurrentUser}
               />
             }
           />
@@ -243,8 +246,8 @@ function App() {
             }
           />
 
-          <Route exact path="/404" element={<NotFound />} />
-          <Route exact path="/" element={<Main />} />
+          {/* <Route path="/" element={<Main />} /> */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Menu isOpen={isMenuOpen} onClose={closeAllPopups} />
       </VisibleRowsProvider>
