@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 
 import mainApi from "../utils/MainApi";
-import moviesApi from "../utils/MoviesApi";
+import getAllMovies from "../utils/MoviesApi";
 
 export const MovieContext = createContext();
 
@@ -42,15 +42,41 @@ export const MovieProvider = ({ children }) => {
     }
   }
 
+  //вернет true если не найдено локальной копии отфильтрованных фильмов, но есть копия поискового запроса
+  //значит сделать поиск
   function downloadMovies() {
     const moviesLocalCopy =
       JSON.parse(localStorage.getItem("sorted-beatfilm-movies")) || [];
-      
-    if (moviesLocalCopy.length !== 0) {
-      setMovies(moviesLocalCopy);
-    }else{
 
-        //добавить проверку
+    //если локальная копия не была найдена
+    if (moviesLocalCopy.length === 0) {
+      const optionsLocalCopy = JSON.parse(
+        localStorage.getItem("options-beatfilm-movies")
+      );
+      //если ранее уже был запрос на поиск фильмов
+      if (optionsLocalCopy) {
+        if (!JSON.parse(localStorage.getItem("beatfilm-movies"))) {
+          getAllMovies()
+            .then((data) => {
+              // Сохраняем данные в localStorage
+              localStorage.setItem("beatfilm-movies", JSON.stringify(data));
+              //возвращаем true для поиска фильмов
+              return true;
+            })
+            .catch((error) => {
+              setMovies(moviesLocalCopy);
+              return false;
+            });
+        } else {
+          return true;
+        }
+      } else {
+        setMovies(moviesLocalCopy);
+        return false;
+      }
+    } else {
+      setMovies(moviesLocalCopy);
+      return false;
     }
   }
 

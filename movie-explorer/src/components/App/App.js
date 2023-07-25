@@ -57,8 +57,8 @@ function App() {
         .then((userData) => {
           setCurrentUser(userData);
           setLoggedIn(true);
-              downloadMovies();
-              downloadSavedMovies();
+              //downloadMovies();
+              //downloadSavedMovies();
         })
         .catch((error) => {
           console.log(error);

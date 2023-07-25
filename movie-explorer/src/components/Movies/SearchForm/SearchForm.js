@@ -54,7 +54,9 @@ function SearchForm({
       setSwitcherMode(
         optionsLocalCopy.switcherMode ? optionsLocalCopy.switcherMode : false
       );
-      setSearchQuery(optionsLocalCopy.searchQuery ? optionsLocalCopy.searchQuery : "");
+      setSearchQuery(
+        optionsLocalCopy.searchQuery ? optionsLocalCopy.searchQuery : ""
+      );
     }
   }, []);
 

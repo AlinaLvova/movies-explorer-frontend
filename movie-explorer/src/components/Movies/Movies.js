@@ -18,10 +18,14 @@ function Movies({ onMenuButtonClick, searchFilter, errorMessage, setErrorMessage
   const {searchTermMovies, setSearchTermMovies} = useContext(SearchContext);
   const {switcherMode, setSwitcherMode} = useContext(SearchContext);
  
-  useEffect(() => {
-    downloadMovies();
-  }, []);
 
+  useEffect(() => {
+    //вариант - нет локальных копий всех фильмов и отсортированных, но есть локальная копия поискового запроса
+    if (downloadMovies()){
+      handleSearch();
+    }
+  }, []);
+  
   async function handleSearch() {
     const optionsData = {
       searchQuery: searchTermMovies,
@@ -41,6 +45,7 @@ function Movies({ onMenuButtonClick, searchFilter, errorMessage, setErrorMessage
 
     // Если в localStorage нет сохраненных данных, получаем данные из сервиса Beatfilm-Movies
     if (!storedMovies) {
+
       getAllMovies()
         .then((data) => {
           // Сохраняем данные в localStorage
@@ -57,7 +62,6 @@ function Movies({ onMenuButtonClick, searchFilter, errorMessage, setErrorMessage
         });
     } else {
       // Если данные уже есть в localStorage, используем их
-
       try {
         searchFilter(switcherMode, "beatfilm-movies");
       } catch (error) {
