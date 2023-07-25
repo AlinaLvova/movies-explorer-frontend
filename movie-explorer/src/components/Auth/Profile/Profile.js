@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "../../Common/Header/Header";
 import SubmitButton from "../../Auth/SubmitButton/SubmitButton";
 import mainApi from "../../../utils/MainApi";
+import { ERROR_MESSAGE_INVALID_EMAIL } from "../../../utils/constant";
 
 import "./Profile.css";
 
@@ -50,7 +51,7 @@ function Profile({ name, email, onMenuButtonClick, setLoggedIn, setCurrentUser }
 
     const isEmailValid = emailRegex.test(emailInput.value);
     if(!isEmailValid){
-      setErrorMessage("Пожалуйста, укажите корректный email в формате 'xxx@xx.xx', где xxx может содержать буквы, цифры, а также символы подчеркивания, тире и точки, а xx представляет доменное имя, состоящее из двух или трех букв, например, com, net, org, co.uk и т.д");
+      setErrorMessage(ERROR_MESSAGE_INVALID_EMAIL);
     }
 
     // Если оба поля валидны, активируем кнопку

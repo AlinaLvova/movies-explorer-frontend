@@ -106,6 +106,9 @@ function Register(props) {
             ["email"]: err.message,
           }));
         }
+        else{
+          console.log(err.status, err.errorMessage);
+        }
       });
   }
 
