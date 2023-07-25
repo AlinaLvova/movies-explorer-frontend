@@ -49,15 +49,7 @@ function SearchForm({
   };
 
   useEffect(() => {
-    const optionsLocalCopy = JSON.parse(localStorage.getItem(localStorageName));
-    if (optionsLocalCopy && !isSaved) {
-      setSwitcherMode(
-        optionsLocalCopy.switcherMode ? optionsLocalCopy.switcherMode : false
-      );
-      setSearchQuery(
-        optionsLocalCopy.searchQuery ? optionsLocalCopy.searchQuery : ""
-      );
-    }
+
   }, []);
 
   return (

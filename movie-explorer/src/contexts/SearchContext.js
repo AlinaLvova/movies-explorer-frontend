@@ -12,6 +12,25 @@ export const SearchProvider = ({ children }) => {
     setSearchTermMovies(value);
   };
 
+  useEffect(() => {
+    const [term, mode] = installLocalCopy("options-beatfilm-movies");
+    setSearchTermMovies(term);
+    setSwitcherMode(mode);
+  }, []);
+
+  function installLocalCopy(localStorageName){
+    const optionsLocalCopy = JSON.parse(localStorage.getItem(localStorageName));
+    if (optionsLocalCopy) {
+      const mode =
+        optionsLocalCopy.switcherMode ? optionsLocalCopy.switcherMode : false;
+      const term =
+        optionsLocalCopy.searchQuery ? optionsLocalCopy.searchQuery : "";
+      return [term, mode];
+    }else{
+      return ["", false];
+    }
+  }
+
   return (
     <SearchContext.Provider
       value={{
