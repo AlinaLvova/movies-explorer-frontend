@@ -3,7 +3,7 @@ import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { MovieContext } from "../../contexts/MovieContext";
 import { VisibleRowsProvider } from "../../contexts/VisibleRowsContext";
-import { PreloaderContext } from "../../contexts/PreloaderContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { SearchContext } from "../../contexts/SearchContext";
 import {
   SHORT_MOVIE_DURATION,
@@ -13,7 +13,6 @@ import {
 import Menu from "../Common/Header/Menu/Menu";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
-// import movieList from "../../utils/movieList";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Register from "../Auth/Register/Register";
 import Login from "../Auth/Login/Login";
@@ -21,40 +20,27 @@ import Profile from "../Auth/Profile/Profile";
 import NotFound from "../NotFound/NotFound";
 import ProtectedRouteElement from "../ProtectedRoute/ProtectedRoute";
 
-import getAllMovies from "../../utils/MoviesApi";
 import mainApi from "../../utils/MainApi";
 
 function App() {
-  const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({});
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const { addMovieList, downloadMovies, downloadSavedMovies, addSavedMovieList } =
     useContext(MovieContext);
-  const { isActivePreloader, setStatePreloader } = useContext(PreloaderContext);
   const { searchTermMovies, searchTermSavedMovies } = useContext(SearchContext);
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
   useEffect(() => {
     handleCheckToken();
-    // downloadMovies();
-    // downloadSavedMovies();
   }, []);
 
   const handleOpenMenu = () => {
     setIsMenuOpen(true);
   };
 
-  const handleLogin = () => {
-    //setIsMenuOpen(true);
-  };
-
   const handleSetLoggedIn = (value) => {
     setLoggedIn(value);
-  };
-
-  const handleSetCurrentUser = (user) => {
-    setCurrentUser(user);
   };
 
   const closeAllPopups = () => {
@@ -106,9 +92,15 @@ function App() {
   }
 
   function searchFilter(isCheckedSwitcher, movieListName) {
+    const storedMovies = JSON.parse(localStorage.getItem(movieListName));
+
+    if(!storedMovies){
+      return;
+    }
+
     let sortedMovies;
     //поиск по названию
-    sortedMovies = findMovieByTitle(JSON.parse(localStorage.getItem(movieListName)));
+    sortedMovies = findMovieByTitle(storedMovies);
 
     if (isCheckedSwitcher) {
       sortedMovies = findMovieByDuration(sortedMovies);
@@ -142,7 +134,6 @@ function App() {
               <Login
                 loggedIn={loggedIn}
                 setLoggedIn={handleSetLoggedIn}
-                setCurrentUser={handleSetCurrentUser}
               />
             }
           />
@@ -153,7 +144,6 @@ function App() {
               <Register
                 loggedIn={loggedIn}
                 setLoggedIn={handleSetLoggedIn}
-                setCurrentUser={handleSetCurrentUser}
               />
             }
           />
@@ -164,12 +154,8 @@ function App() {
               <ProtectedRouteElement
                 element={Profile}
                 loggedIn={loggedIn}
-                onProfile={handleLogin}
-                name={currentUser.name}
-                email={currentUser.email}
                 onMenuButtonClick={handleOpenMenu}
                 setLoggedIn={handleSetLoggedIn}
-                setCurrentUser={handleSetCurrentUser}
               />
             }
           />

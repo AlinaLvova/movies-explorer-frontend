@@ -11,9 +11,11 @@ import { ERROR_MESSAGE_INVALID_EMAIL } from "../../../utils/constant";
 import { PreloaderContext } from "../../../contexts/PreloaderContext";
 import Preloader from "../../Preloader/Preloader";
 
+import { CurrentUserContext } from "../../../contexts/CurrentUserContext";
+
 function Login(props) {
   const navigate = useNavigate();
-  const { setLoggedIn, setCurrentUser } = props;
+  const { setLoggedIn } = props;
   const [dataForm, setDataForm] = useState({
     email: "",
     password: "",
@@ -26,6 +28,7 @@ function Login(props) {
   const [errorResponseMessage, setErrorResponseMessage] = useState("");
   const [isActiveSubmitButton, setIsActiveSubmitButton] = useState(false);
   const { isActivePreloader, setStatePreloader } = useContext(PreloaderContext);
+  const { setCurrentUser } = useContext(CurrentUserContext);
 
   function handleSubmitRegister(event) {
     event.preventDefault();
@@ -103,7 +106,7 @@ function Login(props) {
         mainApi
           .getUserInfo(data.token)
           .then((userData) => {
-            setCurrentUser(userData);
+            setCurrentUser({name: userData.name, email: userData.email});
           })
           .catch((err) => console.log(err.status, err.errorMessage));
         navigate("/movies");

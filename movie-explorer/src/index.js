@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { MovieProvider } from "./contexts/MovieContext";
 import { PreloaderProvider } from "./contexts/PreloaderContext";
 import { SearchProvider } from "./contexts/SearchContext";
+import { CurrentUserProvider } from "./contexts/CurrentUserContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,9 +15,11 @@ root.render(
     <BrowserRouter>
       <MovieProvider>
       <SearchProvider>
+      <CurrentUserProvider>
         <PreloaderProvider>
           <App />
         </PreloaderProvider>
+      </CurrentUserProvider>
       </SearchProvider>
       </MovieProvider>
     </BrowserRouter>

@@ -2,20 +2,24 @@ import { useState, React, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../../Common/Header/Header";
 import SubmitButton from "../../Auth/SubmitButton/SubmitButton";
-import mainApi from "../../../utils/MainApi";
+import Preloader from "../../Preloader/Preloader";
+
 import { ERROR_MESSAGE_INVALID_EMAIL } from "../../../utils/constant";
 import { PreloaderContext } from "../../../contexts/PreloaderContext";
-import Preloader from "../../Preloader/Preloader";
+import { CurrentUserContext } from "../../../contexts/CurrentUserContext";
+
+import mainApi from "../../../utils/MainApi";
 
 import "./Profile.css";
 
-function Profile({ name, email, onMenuButtonClick, setLoggedIn, setCurrentUser }) {
+function Profile({ onMenuButtonClick, setLoggedIn }) {
   const navigate = useNavigate();
   const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
   const [updatedUserData, setUpdatedUserData] = useState({
-    name: name,
-    email: email,
+    name: currentUser.name,
+    email: currentUser.email,
   });
 
   const [updateButton, setUpdateButton] = useState(false);
@@ -106,7 +110,7 @@ function Profile({ name, email, onMenuButtonClick, setLoggedIn, setCurrentUser }
       <Header onClickMenuButton={onMenuButtonClick}></Header>
       <main className="content">
         <section className="profile">
-          <h1 className="profile__greetings">Привет, {name}!</h1>
+          <h1 className="profile__greetings">Привет, {currentUser.name}!</h1>
           <form 
             className="profile__data-container"
             action="#"
