@@ -1,7 +1,7 @@
 import "./App.css";
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
-import { MovieProvider, MovieContext } from "../../contexts/MovieContext";
+import { MovieContext } from "../../contexts/MovieContext";
 import { VisibleRowsProvider } from "../../contexts/VisibleRowsContext";
 import { PreloaderContext } from "../../contexts/PreloaderContext";
 import { SearchContext } from "../../contexts/SearchContext";
@@ -13,7 +13,7 @@ import {
 import Menu from "../Common/Header/Menu/Menu";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
-import movieList from "../../utils/movieList";
+// import movieList from "../../utils/movieList";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Register from "../Auth/Register/Register";
 import Login from "../Auth/Login/Login";
@@ -30,14 +30,15 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  // const [moviesList, setMoviesList] = useState([]);
-  const { moviesList, addMovieList } = useContext(MovieContext);
-  const { addMovies, removeMovie, addMovie } = useContext(MovieContext);
+  const { addMovieList, downloadMovies, downloadSavedMovies, addSavedMovieList } =
+    useContext(MovieContext);
   const { isActivePreloader, setStatePreloader } = useContext(PreloaderContext);
-  const { searchTerm, setSearchTerm } = useContext(SearchContext);
+  const { searchTermMovies, searchTermSavedMovies } = useContext(SearchContext);
 
   useEffect(() => {
     handleCheckToken();
+    // downloadMovies();
+    // downloadSavedMovies();
   }, []);
 
   const handleOpenMenu = () => {
@@ -70,27 +71,28 @@ function App() {
         .then((userData) => {
           setCurrentUser(userData);
           setLoggedIn(true);
+              downloadMovies();
+              downloadSavedMovies();
         })
         .catch((error) => {
           console.log(error);
         })
-        .finally(() => {
-        });
+        .finally(() => {});
     } else {
       setLoggedIn(false);
-
     }
   }
 
   function findMovieByTitle(storedMovies) {
-    let sortedMovies = storedMovies.filter((movie) =>
-      movie.nameRU.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-    localStorage.setItem(
-      "moviesListAfterSearching",
-      JSON.stringify(sortedMovies)
-    );
+    let sortedMovies = storedMovies.filter((movie) => {
+      if (movie.title) {
+        return movie.title.toLowerCase().includes(searchTermSavedMovies.toLowerCase());
+      }
+      if (movie.nameRU) {
+        return movie.nameRU.toLowerCase().includes(searchTermMovies.toLowerCase());
+      }
+      return null;
+    });
 
     return sortedMovies;
   }
@@ -103,13 +105,10 @@ function App() {
     return sortedMovies;
   }
 
-  function searchFilter(isCheckedSwitcher) {
-    const storedMovies = JSON.parse(localStorage.getItem("beatfilm-movies"));
-
+  function searchFilter(isCheckedSwitcher, movieListName) {
     let sortedMovies;
     //поиск по названию
-
-    sortedMovies = findMovieByTitle(storedMovies);
+    sortedMovies = findMovieByTitle(JSON.parse(localStorage.getItem(movieListName)));
 
     if (isCheckedSwitcher) {
       sortedMovies = findMovieByDuration(sortedMovies);
@@ -121,46 +120,10 @@ function App() {
       setErrorMessage("");
     }
 
-    addMovieList(sortedMovies);
-  }
-
-  function handleSearch(isCheckedSwitcher) {
-    // Проверяем, есть ли уже сохраненные данные в localStorage
-    const storedMovies = JSON.parse(localStorage.getItem("beatfilm-movies"));
-
-    // Если в localStorage нет сохраненных данных, получаем данные из сервиса Beatfilm-Movies
-    if (!storedMovies) {
-      //отобразить прелоадер
-      setStatePreloader(true);
-
-      getAllMovies()
-        .then((data) => {
-          // Сохраняем данные в localStorage
-          localStorage.setItem("beatfilm-movies", JSON.stringify(data));
-
-          searchFilter(isCheckedSwitcher);
-        })
-        .catch((error) => {
-          setErrorMessage(error.message);
-        })
-        .finally(() => {
-          //скрыть прелоадер
-          setStatePreloader(false);
-        });
-    } else {
-      // Если данные уже есть в localStorage, используем их
-
-      //отобразить прелоадер перед началом поиска
-      setStatePreloader(true);
-
-      try {
-        searchFilter(isCheckedSwitcher);
-      } catch (error) {
-        setErrorMessage();
-      } finally {
-        // Скрыть прелоадер после завершения поиска
-        setStatePreloader(false);
-      }
+    if (movieListName === "beatfilm-movies")
+      addMovieList(sortedMovies);
+    if (movieListName === "saved-movies"){
+      addSavedMovieList(sortedMovies);
     }
   }
 
@@ -170,13 +133,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={
-              loggedIn ? (
-                <Navigate to="/movies" replace />
-              ) : (
-                <Main />
-              )
-            }
+            element={loggedIn ? <Navigate to="/movies" replace /> : <Main />}
           />
           <Route
             exact
@@ -222,12 +179,11 @@ function App() {
             element={
               <ProtectedRouteElement
                 element={Movies}
-                moviesList={moviesList}
                 onMenuButtonClick={handleOpenMenu}
-                onSearch={handleSearch}
                 errorMessage={errorMessage}
                 setErrorMessage={setErrorMessage}
                 loggedIn={loggedIn}
+                searchFilter={searchFilter}
               />
             }
           />
@@ -240,6 +196,8 @@ function App() {
                 loggedIn={loggedIn}
                 onMenuButtonClick={handleOpenMenu}
                 errorMessage={errorMessage}
+                setErrorMessage={setErrorMessage}
+                searchFilter={searchFilter}
               />
             }
           />

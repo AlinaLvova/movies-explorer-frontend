@@ -12,8 +12,8 @@ const calculateStartColumnsAndRowsCount = () => {
   return {columns: 1, rows: 5};
 };
 
-function MoviesCardList({ moviesList, isActive }) {
-  const { savedMovies, addMovie, removeMovie } = useContext(MovieContext);
+function MoviesCardList({ movies, isActive, loadMoreButtomMove}) {
+  const { savedMovies, addSavedMovie, removeSavedMovie } = useContext(MovieContext);
   const { addRows, getRows } = useContext(VisibleRowsContext);
 
   const startVisibleRows = getRows();
@@ -21,20 +21,20 @@ function MoviesCardList({ moviesList, isActive }) {
 
   const [cardCount, setCardCount] = useState(startVisibleRows * columns);
 
-  const calculateColumns = (moviesList) => {
+  const calculateColumns = (movies) => {
     const newColumns = calculateStartColumnsAndRowsCount().columns;
     const newRows = calculateStartColumnsAndRowsCount().rows;
     setColumns(newColumns);
     const requiredCardCount = newColumns * newRows;
-    if (moviesList.length < requiredCardCount) {
-      setCardCount(moviesList.length);
+    if (movies.length < requiredCardCount) {
+      setCardCount(movies.length);
     } else {
       setCardCount(requiredCardCount);
     }
   };
 
   useEffect(() => {
-    calculateColumns({ moviesList });
+    calculateColumns({ movies });
 
     window.addEventListener("resize", calculateColumns);
 
@@ -43,37 +43,31 @@ function MoviesCardList({ moviesList, isActive }) {
     };
   }, []);
 
-  // useEffect(() => {
-  //   calculateColumns(moviesList);
-  // }, [moviesList.length]);
-
   const loadMoreCards = () => {
     setCardCount(cardCount + (columns === 1 ? (columns + 1) : columns));
     addRows();
   };
 
-  const visibleCards = moviesList.slice(0, cardCount);
+  const visibleCards = !loadMoreButtomMove ? movies : movies.slice(0, cardCount);
 
   return (
-    <section className={`movies-card-list ${cardCount < moviesList.length ? "" : "movies-card-list_padding"} ${isActive ? "disabled" : ""}`}>
+    <section className={`movies-card-list ${cardCount < movies.length ? "" : "movies-card-list_padding"} ${isActive ? "disabled" : ""}`}>
       <ul className="movies-card-list__container">
         {visibleCards.length > 0 &&
           visibleCards.map((movie, index) => (
           <MoviesCard
             key={index}
-            title={movie.nameRU}
+            movieId={movie.movieId}
+            title={movie.title}
             duration={movie.duration}
-            backdrop={["https://api.nomoreparties.co/", movie.image.formats.thumbnail.url].join('')}
-            isSaved={savedMovies.some(
-              (savedMovie) => savedMovie.title === movie.title
-            )}
-            onAddToSaved={addMovie}
-            onRemoveFromSaved={removeMovie}
+            backdrop={movie.backdrop}
+            onAddToSaved={addSavedMovie}
+            onRemoveFromSaved={removeSavedMovie}
             trailerLink={movie.trailerLink}
           />
         ))}
       </ul>
-      {cardCount < moviesList.length && (
+      {(cardCount < movies.length && loadMoreButtomMove) && (
         <button
           type="button"
           className="movies-card-list__button link"

@@ -22,10 +22,15 @@ class Api {
 
   // Сохранить фильм в избранное
   saveMovie(movie) {
+    const token = localStorage.getItem('token');
+
     return fetch(`${this.baseUrl}/movies`, {
-      headers: this.headers,
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
       method: "POST",
-      body: JSON.stringify({ movie }),
+      body: JSON.stringify(movie),
     }).then((response) => {
       return this._handleResponse(
         response,
@@ -36,8 +41,13 @@ class Api {
 
   //удалить фильм по id
   deleteMovie(movieId) {
+    const token = localStorage.getItem('token');
+
     return fetch(`${this.baseUrl}/movies/${movieId}`, {
-      headers: this.headers,
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
       method: "DELETE",
     }).then((response) => {
       return this._handleResponse(
@@ -49,8 +59,13 @@ class Api {
 
   //получить список фильмов
   getMovieList() {
+    const token = localStorage.getItem('token');
+
     return fetch(`${this.baseUrl}/movies`, {
-      headers: this.headers,
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
       method: "GET",
     }).then((response) => {
       return this._handleResponse(

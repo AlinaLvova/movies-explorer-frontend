@@ -1,30 +1,47 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
+import image_404 from "../../../images/404.webp";
+
 
 import "./MoviesCard.css";
 import { MovieContext } from "../../../contexts/MovieContext";
 
-function MoviesCard({ title, duration, backdrop, isSaved, trailerLink }) {
-  const [favourites, setFavourites] = useState(isSaved);
-  const { addMovie, removeMovie } = useContext(MovieContext);
+function MoviesCard({ movieId, title, duration, backdrop, trailerLink, _id }) {
+  const [favourites, setFavourites] = useState(false);
+  const { addSavedMovie, removeSavedMovie, savedMovies, movies } = useContext(MovieContext);
   const location = useLocation();
   const [isFavoritesRoute, setIsFavoritesRoute] = useState(
     location.pathname === "/saved-movies"
   );
+  const [imageError, setImageError] = useState(false);
+
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
+  useEffect(() => {
+    if( !isFavoritesRoute ) {
+      if(savedMovies) {
+        const isFavorite = savedMovies.some(movie => movie.movieId === movieId);
+        setFavourites(isFavorite);
+      }
+    }
+  }, [savedMovies, movies]);
 
   function handleClick(event) {
     event.preventDefault();
     if (favourites) {
-      removeMovie(title);
+      removeSavedMovie(movieId);
     } else {
-      addMovie({ title, duration, backdrop });
+      addSavedMovie(movieId);
     }
     setFavourites(!favourites);
   }
 
-  function handleRemoveMovie() {
-    removeMovie(title);
-    //setFavourites(false);
+  function handleRemoveMovie(event) {
+    event.preventDefault();
+    removeSavedMovie(movieId);
+    setFavourites(false);
   }
 
   useEffect(() => {
@@ -73,11 +90,20 @@ function MoviesCard({ title, duration, backdrop, isSaved, trailerLink }) {
             ></button>
           )}
         </div>
+        {imageError ? (
+          <img
+            className="movies-card__backdrop"
+            src={image_404}
+            alt="not found"
+          />
+        ) : (
         <img
           className="movies-card__backdrop"
           src={backdrop}
-          alt={`Кадр из фильма: ${title}`}
+          alt={`Кадр из фильма: ${title}` }
+          onError={handleImageError}
         />
+        )}
       </Link>
     </li>
   );

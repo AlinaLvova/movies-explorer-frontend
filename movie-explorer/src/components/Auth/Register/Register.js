@@ -91,7 +91,6 @@ function Register(props) {
               .getUserInfo(data.token)
               .then((userData) => {
                 setCurrentUser(userData);
-                console.log("userData===", userData);
               })
               .catch((err) => console.log(err.status, err.errorMessage));
               navigate('/movies');

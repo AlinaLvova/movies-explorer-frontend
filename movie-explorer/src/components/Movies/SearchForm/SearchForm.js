@@ -1,43 +1,66 @@
 import React, { useState, useContext, useEffect } from "react";
 import "./SearchForm.css";
 import Switcher from "./Switcher/Switcher";
-import { ERROR_MESSAGE_NOT_FOUND } from "../../../utils/constant";
+import { ERROR_MESSAGE_NOT_KEY_SEARCH } from "../../../utils/constant";
 import { SearchContext } from "../../../contexts/SearchContext";
 
-function SearchForm({ onSearch, errorMessage, setErrorMessage }) {
-  const [isCheckedSwitcher, setIsCheckedSwitcher] = useState(false);
-  const [errorMessageNotFound, setErrorMessageNotFound] = useState('');
-  const { searchTerm, setSearchTerm } = useContext(SearchContext);
+function SearchForm({
+  onSearch,
+  errorMessage,
+  setErrorMessage,
+  setSwitcherMode,
+  switcherMode,
+  searchQuery,
+  setSearchQuery,
+  localStorageName,
+  isSaved
+}) {
+  const [errorMessageNotFound, setErrorMessageNotFound] = useState("");
 
   function handleCheckboxChange() {
-    setIsCheckedSwitcher(!isCheckedSwitcher);
+    setSwitcherMode(!switcherMode);
   }
 
   useEffect(() => {
-    if (searchTerm !== ""){
-      onSearch(isCheckedSwitcher);
+    if (searchQuery !== "" || isSaved) {
+      onSearch();
+      //handleSearch();
     }
-  }, [isCheckedSwitcher]);
+  }, [switcherMode]);
 
   const handleChangeInput = (event) => {
     event.preventDefault();
     const value = event.target.value;
     setErrorMessageNotFound("");
     setErrorMessage("");
-    setSearchTerm(value);
+    setSearchQuery(value);
   };
 
   const handleSearch = (event) => {
-    event.preventDefault();
-    setErrorMessageNotFound(searchTerm === '' ? ERROR_MESSAGE_NOT_FOUND : "");
-    if (searchTerm !== ""){
-      onSearch(isCheckedSwitcher);
+    if (event) {
+      event.preventDefault();
+    }
+    setErrorMessageNotFound(
+      (searchQuery === "" && !isSaved) ? ERROR_MESSAGE_NOT_KEY_SEARCH : ""
+    );
+    if (searchQuery !== "" || isSaved) {
+      onSearch();
     }
   };
 
+  useEffect(() => {
+    const optionsLocalCopy = JSON.parse(localStorage.getItem(localStorageName));
+    if (optionsLocalCopy && !isSaved) {
+      setSwitcherMode(
+        optionsLocalCopy.switcherMode ? optionsLocalCopy.switcherMode : false
+      );
+      setSearchQuery(optionsLocalCopy.searchQuery ? optionsLocalCopy.searchQuery : "");
+    }
+  }, []);
+
   return (
     <section className="search-form">
-      <form 
+      <form
         className="search-form__search-container"
         onSubmit={handleSearch}
         noValidate
@@ -48,26 +71,22 @@ function SearchForm({ onSearch, errorMessage, setErrorMessage }) {
             className="search-form__input-field"
             type="text"
             placeholder="Фильм"
-            value={searchTerm}
+            value={searchQuery}
             required
             onChange={handleChangeInput}
           ></input>
-          <button
-            type="submit"
-            className="search-form__search-btn link"
-          >
+          <button type="submit" className="search-form__search-btn link">
             Найти
           </button>
         </div>
         <div className="search-form__switcher-container">
-          <Switcher
-            onChecked={handleCheckboxChange}
-            isChecked={isCheckedSwitcher}
-          />
+          <Switcher onChecked={handleCheckboxChange} isChecked={switcherMode} />
           <span className="search-form__switcher-text">Короткометражки</span>
         </div>
       </form>
-      <span className="search-form__error-text">{errorMessage === "" ? errorMessageNotFound : errorMessage}</span>
+      <span className="search-form__error-text">
+        {errorMessage === "" ? errorMessageNotFound : errorMessage}
+      </span>
     </section>
   );
 }

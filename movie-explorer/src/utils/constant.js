@@ -4,6 +4,7 @@ const BASE_URL = 'https://api.movie.nomoredomains.rocks';
 
 const ERROR_MESSAGE_SEARCH_MOVIES_API = "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.";
 const ERROR_MESSAGE_NOT_FOUND = "Ничего не найдено.";
+const ERROR_MESSAGE_NOT_KEY_SEARCH = "Необходимо ввести ключевое слово.";
 const SHORT_MOVIE_DURATION = 40;
 
 module.exports = {
@@ -12,4 +13,5 @@ module.exports = {
   ERROR_MESSAGE_SEARCH_MOVIES_API,
   ERROR_MESSAGE_NOT_FOUND,
   SHORT_MOVIE_DURATION,
+  ERROR_MESSAGE_NOT_KEY_SEARCH,
 };
