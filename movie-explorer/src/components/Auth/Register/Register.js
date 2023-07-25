@@ -1,4 +1,4 @@
-import { useState, React, useEffect } from "react";
+import { useState, React, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import "./Register.css";
@@ -7,6 +7,9 @@ import SubmitButton from "../SubmitButton/SubmitButton";
 import FormNav from "../FormNav/FormNav";
 import Header from "../../Common/Header/Header";
 import mainApi from "../../../utils/MainApi";
+import { ERROR_MESSAGE_INVALID_EMAIL } from "../../../utils/constant";
+import { PreloaderContext } from "../../../contexts/PreloaderContext";
+import Preloader from "../../Preloader/Preloader";
 
 function Register(props) {
   const navigate = useNavigate();
@@ -22,7 +25,9 @@ function Register(props) {
     email: "",
     password: "",
   });
+  const [errorResponseMessage, setErrorResponseMessage] = useState("");
   const [isActiveSubmitButton, setIsActiveSubmitButton] = useState(false);
+  const { isActivePreloader, setStatePreloader } = useContext(PreloaderContext);
 
   function handleSubmitRegister(event) {
     event.preventDefault();
@@ -52,8 +57,7 @@ function Register(props) {
       // Проверка ввода email с помощью регулярного выражения
       const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
       if (!emailRegex.test(formElement.value)) {
-        errorMessage =
-          "Пожалуйста, укажите корректный email в формате 'xxx@xx.xx', где xxx может содержать буквы, цифры, а также символы подчеркивания, тире и точки, а xx представляет доменное имя, состоящее из двух или трех букв, например, com, net, org, co.uk и т.д";
+        errorMessage = ERROR_MESSAGE_INVALID_EMAIL;
       }
     } else {
       if (!formElement.validity.valid) {
@@ -70,6 +74,8 @@ function Register(props) {
   function handleChangeRegister(event) {
     const formElement = event.target;
 
+    setErrorResponseMessage("");
+
     setDataForm((dataForm) => ({
       ...dataForm,
       [formElement.id]: formElement.value,
@@ -78,7 +84,11 @@ function Register(props) {
     validateFormFields(formElement);
   }
 
+  // useEffect((() => {setStatePreloader(true)}),[]);
+
   function registerUser(dataForm) {
+    setStatePreloader(true);
+
     mainApi
       .register(dataForm)
       .then((data) => {
@@ -101,14 +111,19 @@ function Register(props) {
       })
       .catch((err) => {
         if (err.status === 409 && err.message === 'Пользователь с таким email уже зарегистрирован'){
-          setErrorMessages((messages) => ({
-            ...messages,
-            ["email"]: err.message,
-          }));
+          // setErrorMessages((messages) => ({
+          //   ...messages,
+          //   ["email"]: err.message,
+          // }));
+          setErrorResponseMessage(err.message);
         }
         else{
-          console.log(err.status, err.errorMessage);
+          // console.log(err.status, err.errorMessage);
+          setErrorResponseMessage(err.message);
         }
+      })
+      .finally(() => {
+        setStatePreloader(false);
       });
   }
 
@@ -168,10 +183,12 @@ function Register(props) {
               onChange={handleChangeRegister}
               minLength="1"
             />
+            {isActivePreloader && <Preloader/>}
             <div className="register-form__button">
               <SubmitButton
                 title={"Зарегистрироваться"}
                 isActive={isActiveSubmitButton}
+                errorMessage={errorResponseMessage}
               />
             </div>
           </form>

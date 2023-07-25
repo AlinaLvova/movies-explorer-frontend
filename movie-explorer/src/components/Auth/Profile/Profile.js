@@ -1,9 +1,11 @@
-import { useState, React, useEffect } from "react";
+import { useState, React, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../../Common/Header/Header";
 import SubmitButton from "../../Auth/SubmitButton/SubmitButton";
 import mainApi from "../../../utils/MainApi";
 import { ERROR_MESSAGE_INVALID_EMAIL } from "../../../utils/constant";
+import { PreloaderContext } from "../../../contexts/PreloaderContext";
+import Preloader from "../../Preloader/Preloader";
 
 import "./Profile.css";
 
@@ -18,12 +20,13 @@ function Profile({ name, email, onMenuButtonClick, setLoggedIn, setCurrentUser }
 
   const [updateButton, setUpdateButton] = useState(false);
   const [isActiveSubmitButton, setIsActiveSubmitButton] = useState(false);
-  const [isDisabledInputField, setisDisabledInputField] = useState(true);
+  const [isDisabledInputField, setIsDisabledInputField] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const { isActivePreloader, setStatePreloader } = useContext(PreloaderContext);
 
   const handleUpdateButtonClick = () => {
     setUpdateButton(true);
-    setisDisabledInputField(false);
+    setIsDisabledInputField(false);
   };
 
   const handleChangeInputData = (event) => {
@@ -59,7 +62,7 @@ function Profile({ name, email, onMenuButtonClick, setLoggedIn, setCurrentUser }
   }
 
   function handleLogoutButtonClick() {
-    localStorage.removeItem("token");
+    localStorage.clear();
     setLoggedIn(false);
     navigate("/");
   }
@@ -67,6 +70,7 @@ function Profile({ name, email, onMenuButtonClick, setLoggedIn, setCurrentUser }
   function updateProfile(updatedUserData){
     setIsActiveSubmitButton(false);
 
+    setStatePreloader(true);
     mainApi
       .updateUserInfo({
         name: updatedUserData.name,
@@ -75,17 +79,24 @@ function Profile({ name, email, onMenuButtonClick, setLoggedIn, setCurrentUser }
       .then((response) => {
         setCurrentUser({name: response.name, email: response.email});
         setUpdateButton(false);
+        setIsDisabledInputField(true);
       })
       .catch((error) => {
         setErrorMessage(error.message);
-        setisDisabledInputField(false);
+        if (error.status === 409){
+          setIsActiveSubmitButton(false);
+          setIsDisabledInputField(false);
+        }
+      })
+      .finally(() => {
+        setStatePreloader(false);
       });
   }
 
   function handleSubmitUpdateProfile(event) {
     event.preventDefault();
 
-    setisDisabledInputField(true);
+    setIsDisabledInputField(true);
 
     updateProfile(updatedUserData);
   }
@@ -131,6 +142,7 @@ function Profile({ name, email, onMenuButtonClick, setLoggedIn, setCurrentUser }
                 disabled={isDisabledInputField}
               />
             </div>
+            {isActivePreloader && <Preloader/>}
             {updateButton && (
               <div className="profile__update-container">
                 <span className="profile__span-update">{errorMessage}</span>

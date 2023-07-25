@@ -2,12 +2,14 @@ import React, { useState } from "react";
 
 import "./SubmitButton.css";
 
-function SubmitButton({ title, onClick, isActive }) {
+function SubmitButton({ title, onClick, isActive, errorMessage }) {
   const handleClick = () => {
     //onClick();
   };
 
   return (
+    <>
+    <span className={`submit-button-error-message ${errorMessage !== '' ? "active" : ""}`}>{errorMessage}</span>
     <button
       //onClick={handleClick}
       type="submit"
@@ -18,6 +20,7 @@ function SubmitButton({ title, onClick, isActive }) {
     >
       {title}
     </button>
+    </>
   );
 }
 

@@ -5,7 +5,7 @@ import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "../Common/MoviesCardList/MoviesCardList";
 import Header from "../Common/Header/Header";
 import Footer from "../Common/Footer/Footer";
-import Preloader from "./Preloader/Preloader";
+import Preloader from "../Preloader/Preloader";
 import { PreloaderContext } from "../../contexts/PreloaderContext";
 import { MovieContext } from "../../contexts/MovieContext";
 import { SearchContext } from "../../contexts/SearchContext";
@@ -22,27 +22,30 @@ function Movies({ onMenuButtonClick, searchFilter, errorMessage, setErrorMessage
     downloadMovies();
   }, []);
 
-  function handleSearch() {
+  async function handleSearch() {
     const optionsData = {
       searchQuery: searchTermMovies,
       switcherMode: switcherMode,
     };
 
-    localStorage.setItem("options-beatfilm-movies", JSON.stringify(optionsData));
-    
+    localStorage.setItem(
+      "options-beatfilm-movies",
+      JSON.stringify(optionsData)
+    );
+
     // Проверяем, есть ли уже сохраненные данные в localStorage
     const storedMovies = JSON.parse(localStorage.getItem("beatfilm-movies"));
 
+    //отобразить прелоадер
+    setStatePreloader(true);
+
     // Если в localStorage нет сохраненных данных, получаем данные из сервиса Beatfilm-Movies
     if (!storedMovies) {
-      //отобразить прелоадер
-      setStatePreloader(true);
-
       getAllMovies()
         .then((data) => {
           // Сохраняем данные в localStorage
           localStorage.setItem("beatfilm-movies", JSON.stringify(data));
-          
+
           searchFilter(switcherMode, "beatfilm-movies");
         })
         .catch((error) => {
@@ -55,15 +58,11 @@ function Movies({ onMenuButtonClick, searchFilter, errorMessage, setErrorMessage
     } else {
       // Если данные уже есть в localStorage, используем их
 
-      //отобразить прелоадер перед началом поиска
-      setStatePreloader(true);
-
       try {
         searchFilter(switcherMode, "beatfilm-movies");
       } catch (error) {
         setErrorMessage(error.message);
       } finally {
-        // Скрыть прелоадер после завершения поиска
         setStatePreloader(false);
       }
     }
@@ -85,11 +84,11 @@ function Movies({ onMenuButtonClick, searchFilter, errorMessage, setErrorMessage
             localStorageName={"options-beatfilm-movies"}
             isSaved={false}
           />
-          <MoviesCardList
+          {!isActivePreloader && <MoviesCardList
             movies={movies}
             isActive={isActivePreloader}
             loadMoreButtomMove={true}
-          />
+          />}
           {isActivePreloader && <Preloader/>}
         </section>
       </main>
