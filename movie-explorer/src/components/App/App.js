@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { MovieContext } from "../../contexts/MovieContext";
 import { VisibleRowsProvider } from "../../contexts/VisibleRowsContext";
@@ -23,13 +23,14 @@ import ProtectedRouteElement from "../ProtectedRoute/ProtectedRoute";
 import mainApi from "../../utils/MainApi";
 
 function App() {
+  const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const { addMovieList, downloadMovies, downloadSavedMovies, addSavedMovieList } =
+  const { addMovieList, addSavedMovieList } =
     useContext(MovieContext);
   const { searchTermMovies, searchTermSavedMovies } = useContext(SearchContext);
-  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+  const { setCurrentUser } = useContext(CurrentUserContext);
 
   useEffect(() => {
     handleCheckToken();
@@ -57,8 +58,7 @@ function App() {
         .then((userData) => {
           setCurrentUser(userData);
           setLoggedIn(true);
-              //downloadMovies();
-              //downloadSavedMovies();
+          navigate("/movies");
         })
         .catch((error) => {
           console.log(error);
