@@ -113,6 +113,7 @@ function Login(props) {
       })
       .catch((err) => {
         setErrorResponseMessage(err.message);
+        setIsActiveSubmitButton(false);
       })
       .finally(() => {
         setStatePreloader(false);

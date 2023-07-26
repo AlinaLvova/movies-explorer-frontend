@@ -125,6 +125,7 @@ function Register(props) {
           // console.log(err.status, err.errorMessage);
           setErrorResponseMessage(err.message);
         }
+        setIsActiveSubmitButton(false);
       })
       .finally(() => {
         setStatePreloader(false);

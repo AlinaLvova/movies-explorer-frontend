@@ -88,9 +88,9 @@ function Profile({ onMenuButtonClick, setLoggedIn }) {
       .catch((error) => {
         setErrorMessage(error.message);
         if (error.status === 409){
-          setIsActiveSubmitButton(false);
           setIsDisabledInputField(false);
         }
+        setIsActiveSubmitButton(false);
       })
       .finally(() => {
         setStatePreloader(false);
