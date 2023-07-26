@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { MovieContext } from "../../contexts/MovieContext";
 import "./SavedMovies.css";
@@ -14,7 +14,7 @@ function SavedMovies({ onRowsCounter, rows, onMenuButtonClick, errorMessage, set
   const {savedMovies, removeSavedMovie, downloadSavedMovies } = useContext(MovieContext);
   const {searchTermSavedMovies, setSearchTermSavedMovies} = useContext(SearchContext);
   const {switcherModeSaved, setSwitcherModeSaved} = useContext(SearchContext);
-  const {isActivePreloader, setStatePreloader} = useContext(PreloaderContext);
+  const {setStatePreloader} = useContext(PreloaderContext);
 
   useEffect(() => {
     downloadSavedMovies();

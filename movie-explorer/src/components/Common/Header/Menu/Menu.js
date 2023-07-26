@@ -4,12 +4,10 @@ import "../HeaderCommon/HeaderCommon";
 import usePopupClose from "../../../../hooks/usePopupClose";
 import ProfileButton from "../ProfileButton/ProfileButton";
 
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 
 function Menu({ isOpen, onClose }) {
-  const handleCloseMenu = () => {};
-
   usePopupClose(isOpen, onClose);
 
   return (

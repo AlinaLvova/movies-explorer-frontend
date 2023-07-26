@@ -28,14 +28,13 @@ function SearchForm({
       setSearchQuery("");
       setSwitcherMode(false);
     }
-  }, [location.pathname]);
+  }, [location.pathname, setSearchQuery, setSwitcherMode]);
 
   useEffect(() => {
     if (searchQuery !== "" || isSaved) {
       onSearch();
-      //handleSearch();
     }
-  }, [switcherMode]);
+  }, [isSaved, onSearch, searchQuery, switcherMode]);
 
   const handleChangeInput = (event) => {
     event.preventDefault();

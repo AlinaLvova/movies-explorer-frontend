@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "./SubmitButton.css";
 
-function SubmitButton({ title, onClick, isActive, errorMessage }) {
-  const handleClick = () => {
-    //onClick();
-  };
+function SubmitButton({ title, isActive, errorMessage }) {
 
   return (
     <>

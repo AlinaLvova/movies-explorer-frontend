@@ -1,7 +1,7 @@
 import "./HeaderCommon.css";
 import "../../constant/common.css";
 import { NavLink } from "react-router-dom";
-import { useState, React } from "react";
+import { React } from "react";
 import ProfileButton from "../ProfileButton/ProfileButton";
 
 function HeaderCommon() {
