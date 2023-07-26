@@ -1,20 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import { MovieContext } from "../../../contexts/MovieContext";
 import { VisibleRowsContext } from "../../../contexts/VisibleRowsContext";
 
 function MoviesCardList({ movies, isActive, loadMoreButtomMove }) {
   const {
     addRows,
-    getRows,
     cardCount,
     setCardCount,
     calculateStartColumnsAndRowsCount,
   } = useContext(VisibleRowsContext);
   const [visibleCards, setVisibleCards] = useState([]);
-
-  const startVisibleRows = getRows();
 
   const calculateColumns = () => {
     const { columns, rows } = calculateStartColumnsAndRowsCount();
@@ -33,15 +29,14 @@ function MoviesCardList({ movies, isActive, loadMoreButtomMove }) {
   }, []);
 
   const loadMoreCards = () => {
-    const newCardCount = cardCount + calculateStartColumnsAndRowsCount().columns;
+    const newCardCount =
+      cardCount + calculateStartColumnsAndRowsCount().columns;
     setCardCount(newCardCount);
     addRows();
   };
 
   useEffect(() => {
-    setVisibleCards(
-      !loadMoreButtomMove ? movies : movies.slice(0, cardCount)
-    );
+    setVisibleCards(!loadMoreButtomMove ? movies : movies.slice(0, cardCount));
   }, [cardCount, loadMoreButtomMove, movies]);
 
   return (

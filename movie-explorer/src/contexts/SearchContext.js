@@ -8,6 +8,13 @@ export const SearchProvider = ({ children }) => {
   const [switcherMode, setSwitcherMode] = useState(false);
   const [switcherModeSaved, setSwitcherModeSaved] = useState(false);
 
+  const resetSearchTermsContext = () => {
+    setSearchTermMovies("");
+    setSearchTermSavedMovies("");
+    setSwitcherMode(false);
+    setSwitcherModeSaved(false);
+  };
+
   const setSearchTermMoviesValue = (value) => {
     setSearchTermMovies(value);
   };
@@ -18,17 +25,19 @@ export const SearchProvider = ({ children }) => {
     setSwitcherMode(mode);
     setSearchTermSavedMovies("");
     setSwitcherModeSaved(false);
-  };
+  }
 
-  function installLocalCopy(localStorageName){
+  function installLocalCopy(localStorageName) {
     const optionsLocalCopy = JSON.parse(localStorage.getItem(localStorageName));
     if (optionsLocalCopy) {
-      const mode =
-        optionsLocalCopy.switcherMode ? optionsLocalCopy.switcherMode : false;
-      const term =
-        optionsLocalCopy.searchQuery ? optionsLocalCopy.searchQuery : "";
+      const mode = optionsLocalCopy.switcherMode
+        ? optionsLocalCopy.switcherMode
+        : false;
+      const term = optionsLocalCopy.searchQuery
+        ? optionsLocalCopy.searchQuery
+        : "";
       return [term, mode];
-    }else{
+    } else {
       return ["", false];
     }
   }
@@ -45,7 +54,8 @@ export const SearchProvider = ({ children }) => {
         setSearchTermMovies,
         setSearchTermMoviesValue,
         searchTermSavedMovies,
-        setTerms
+        setTerms,
+        resetSearchTermsContext,
       }}
     >
       {children}

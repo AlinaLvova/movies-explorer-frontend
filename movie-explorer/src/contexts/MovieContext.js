@@ -9,9 +9,15 @@ export const MovieProvider = ({ children }) => {
   const [savedMovies, setSavedMovies] = useState([]);
   const [movies, setMovies] = useState([]);
 
+  const resetAllMoviesContext = () => {
+    setSavedMovies([]);
+    setMovies([]);
+  };
+
   function downloadSavedMovies() {
-    const savedMoviesLocalCopy =
-      JSON.parse(localStorage.getItem("saved-movies"));
+    const savedMoviesLocalCopy = JSON.parse(
+      localStorage.getItem("saved-movies")
+    );
 
     if (!savedMoviesLocalCopy) {
       mainApi
@@ -29,15 +35,12 @@ export const MovieProvider = ({ children }) => {
 
           setSavedMovies(newMovies);
 
-          localStorage.setItem(
-            "saved-movies",
-            JSON.stringify(newMovies)
-          );
+          localStorage.setItem("saved-movies", JSON.stringify(newMovies));
         })
         .catch((error) => {
           console.log(error);
         });
-    }else{
+    } else {
       setSavedMovies(savedMoviesLocalCopy);
     }
   }
@@ -83,7 +86,7 @@ export const MovieProvider = ({ children }) => {
   useEffect(() => {
     setSavedMovies([]);
     setMovies([]);
-  },[]);
+  }, []);
 
   const addSavedMovie = (movieId) => {
     // Получаем данные из localStorage через промис
@@ -159,7 +162,10 @@ export const MovieProvider = ({ children }) => {
 
     setMovies(newMoviesList);
 
-    localStorage.setItem("sorted-beatfilm-movies", JSON.stringify(newMoviesList));
+    localStorage.setItem(
+      "sorted-beatfilm-movies",
+      JSON.stringify(newMoviesList)
+    );
   };
 
   const addSavedMovieList = (savedMoviesList) => {
@@ -187,10 +193,11 @@ export const MovieProvider = ({ children }) => {
         console.log(error);
       });
   };
-  
+
   return (
     <MovieContext.Provider
       value={{
+        resetAllMoviesContext,
         savedMovies,
         addSavedMovie,
         removeSavedMovie,

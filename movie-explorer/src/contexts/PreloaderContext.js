@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const PreloaderContext = createContext();
 
@@ -9,8 +9,18 @@ export const PreloaderProvider = ({ children }) => {
     setIsActivePreloader(value);
   };
 
+  const resetIsActivePreloaderContext = () => {
+    setIsActivePreloader(false);
+  };
+
+  useEffect(() => {
+    setIsActivePreloader(false);
+  }, []);
+
   return (
-    <PreloaderContext.Provider value={{ isActivePreloader, setStatePreloader}}>
+    <PreloaderContext.Provider
+      value={{ resetIsActivePreloaderContext, isActivePreloader, setStatePreloader }}
+    >
       {children}
     </PreloaderContext.Provider>
   );

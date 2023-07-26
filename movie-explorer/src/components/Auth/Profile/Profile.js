@@ -1,5 +1,5 @@
 import { useState, React, useEffect, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from "../../Common/Header/Header";
 import SubmitButton from "../../Auth/SubmitButton/SubmitButton";
 import Preloader from "../../Preloader/Preloader";
@@ -7,6 +7,9 @@ import Preloader from "../../Preloader/Preloader";
 import { ERROR_MESSAGE_INVALID_EMAIL, SUCCESS_MESSAGE_UPDATE_PROFILE } from "../../../utils/constant";
 import { PreloaderContext } from "../../../contexts/PreloaderContext";
 import { CurrentUserContext } from "../../../contexts/CurrentUserContext";
+import { SearchContext } from "../../../contexts/SearchContext";
+import { VisibleRowsContext } from "../../../contexts/VisibleRowsContext";
+import { MovieContext } from "../../../contexts/MovieContext";
 
 import mainApi from "../../../utils/MainApi";
 
@@ -15,7 +18,10 @@ import "./Profile.css";
 function Profile({ onMenuButtonClick, setLoggedIn }) {
   const navigate = useNavigate();
   const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+  const { currentUser, setCurrentUser, resetCurrentUserContext } = useContext(CurrentUserContext);
+  const { resetSearchTermsContext } = useContext(SearchContext);
+  const { resetVisibleRowsContext } = useContext(VisibleRowsContext);
+  const { resetAllMoviesContext } = useContext(MovieContext);
 
   const [updatedUserData, setUpdatedUserData] = useState({
     name: currentUser.name,
@@ -28,7 +34,7 @@ function Profile({ onMenuButtonClick, setLoggedIn }) {
   const [isActiveSubmitButton, setIsActiveSubmitButton] = useState(false);
   const [isDisabledInputField, setIsDisabledInputField] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
-  const { isActivePreloader, setStatePreloader } = useContext(PreloaderContext);
+  const { isActivePreloader, setStatePreloader, resetIsActivePreloaderContext } = useContext(PreloaderContext);
 
   const handleUpdateButtonClick = () => {
     setShowSubmitButton(true);
@@ -73,6 +79,11 @@ function Profile({ onMenuButtonClick, setLoggedIn }) {
   function handleLogoutButtonClick() {
     localStorage.clear();
     setLoggedIn(false);
+    resetSearchTermsContext();
+    resetCurrentUserContext();
+    resetVisibleRowsContext();
+    resetAllMoviesContext();
+    resetIsActivePreloaderContext();
     navigate("/");
   }
 

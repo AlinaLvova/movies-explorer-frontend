@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect} from "react";
 
 export const CurrentUserContext = createContext();
 
@@ -8,11 +8,26 @@ export const CurrentUserProvider = ({ children }) => {
     "name" : "",
   });
 
+  const resetCurrentUserContext = () => {
+    setCurrentUser({
+      "emails" : "",
+      "name" : "",
+    });
+  };
+
+  useEffect(() => {
+    setCurrentUser({
+      "emails" : "",
+      "name" : "",
+    });
+  }, []);
+
   return (
     <CurrentUserContext.Provider
       value={{
         currentUser,
-        setCurrentUser
+        setCurrentUser,
+        resetCurrentUserContext
       }}
     >
       {children}

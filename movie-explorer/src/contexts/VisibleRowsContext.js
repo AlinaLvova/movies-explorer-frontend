@@ -7,8 +7,15 @@ export const VisibleRowsProvider = ({ children }) => {
   const [visibleRows, setVisibleRows] = useState(0);
   const [visibleRowsSaved, setVisibleRowsSaved] = useState(0);
   const [cardCount, setCardCount] = useState(0);
-  const location = useLocation();
   const [prevPathname, setPrevPathname] = useState("");
+  const location = useLocation();
+
+  const resetVisibleRowsContext = () => {
+    setVisibleRows(0);
+    setVisibleRowsSaved(0);
+    setCardCount(0);
+    setPrevPathname("");
+  };
 
   const calculateStartColumnsAndRowsCount = () => {
     if (window.innerWidth >= 1668) return { columns: 4, rows: 3 };
@@ -29,7 +36,7 @@ export const VisibleRowsProvider = ({ children }) => {
       resetRows();
     }
     setPrevPathname(pathname);
-  }, [location.pathname]);
+  }, [location.pathname, prevPathname]);
 
   useEffect(() => {
     const { columns, rows } = calculateStartColumnsAndRowsCount();
@@ -69,7 +76,8 @@ export const VisibleRowsProvider = ({ children }) => {
         visibleRowsSaved,
         cardCount,
         setCardCount,
-        calculateStartColumnsAndRowsCount
+        calculateStartColumnsAndRowsCount,
+        resetVisibleRowsContext
       }}
     >
       {children}
