@@ -12,11 +12,13 @@ export const SearchProvider = ({ children }) => {
     setSearchTermMovies(value);
   };
 
-  useEffect(() => {
+  function setTerms() {
     const [term, mode] = installLocalCopy("options-beatfilm-movies");
     setSearchTermMovies(term);
     setSwitcherMode(mode);
-  }, []);
+    setSearchTermSavedMovies("");
+    setSwitcherModeSaved(false);
+  };
 
   function installLocalCopy(localStorageName){
     const optionsLocalCopy = JSON.parse(localStorage.getItem(localStorageName));
@@ -43,6 +45,7 @@ export const SearchProvider = ({ children }) => {
         setSearchTermMovies,
         setSearchTermMoviesValue,
         searchTermSavedMovies,
+        setTerms
       }}
     >
       {children}

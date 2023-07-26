@@ -16,6 +16,7 @@ function SearchForm({
   isSaved
 }) {
   const [errorMessageNotFound, setErrorMessageNotFound] = useState("");
+  //const {setTerms} = useContext(SearchContext);
 
   function handleCheckboxChange() {
     setSwitcherMode(!switcherMode);
@@ -49,7 +50,15 @@ function SearchForm({
   };
 
   useEffect(() => {
-
+    const optionsLocalCopy = JSON.parse(localStorage.getItem("options-beatfilm-movies"));
+    if (optionsLocalCopy && !isSaved) {
+      setSwitcherMode(
+        optionsLocalCopy.switcherMode ? optionsLocalCopy.switcherMode : false
+      );
+      setSearchQuery(
+        optionsLocalCopy.searchQuery ? optionsLocalCopy.searchQuery : ""
+      );
+    }
   }, []);
 
   return (

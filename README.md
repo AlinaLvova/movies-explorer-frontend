@@ -7,9 +7,9 @@
 Проект основан на предоставленном макете, который является руководством для визуального оформления и дизайна приложения.
 [Ссылка на макет](https://www.figma.com/file/dXc0nCaqfagfrgaz3qCl7p/Diploma-(Copy)?type=design&node-id=37456%3A5649&mode=design&t=LqDryvvlAdE4iRmz-1)
 
-[Ссылка на пул-реквест]()
+[Ссылка на пул-реквест](https://github.com/AlinaLvova/movies-explorer-frontend/pull/22)
 
-[Ссылка на сайт с проектом]
+[Ссылка на сайт с проектом](https://movie.nomoredomains.rocks/)
 
 Функциональность проекта включает:
 
