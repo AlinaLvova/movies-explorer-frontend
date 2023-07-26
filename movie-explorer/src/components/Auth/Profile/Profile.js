@@ -4,7 +4,11 @@ import Header from "../../Common/Header/Header";
 import SubmitButton from "../../Auth/SubmitButton/SubmitButton";
 import Preloader from "../../Preloader/Preloader";
 
-import { ERROR_MESSAGE_INVALID_EMAIL, SUCCESS_MESSAGE_UPDATE_PROFILE } from "../../../utils/constant";
+import {
+  ERROR_MESSAGE_INVALID_EMAIL,
+  EMAIL_REGEX,
+  SUCCESS_MESSAGE_UPDATE_PROFILE,
+} from "../../../utils/constant";
 import { PreloaderContext } from "../../../contexts/PreloaderContext";
 import { CurrentUserContext } from "../../../contexts/CurrentUserContext";
 import { SearchContext } from "../../../contexts/SearchContext";
@@ -17,8 +21,9 @@ import "./Profile.css";
 
 function Profile({ onMenuButtonClick, setLoggedIn }) {
   const navigate = useNavigate();
-  const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  const { currentUser, setCurrentUser, resetCurrentUserContext } = useContext(CurrentUserContext);
+  const emailRegex = EMAIL_REGEX;
+  const { currentUser, setCurrentUser, resetCurrentUserContext } =
+    useContext(CurrentUserContext);
   const { resetSearchTermsContext } = useContext(SearchContext);
   const { resetVisibleRowsContext } = useContext(VisibleRowsContext);
   const { resetAllMoviesContext } = useContext(MovieContext);
@@ -34,7 +39,11 @@ function Profile({ onMenuButtonClick, setLoggedIn }) {
   const [isActiveSubmitButton, setIsActiveSubmitButton] = useState(false);
   const [isDisabledInputField, setIsDisabledInputField] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
-  const { isActivePreloader, setStatePreloader, resetIsActivePreloaderContext } = useContext(PreloaderContext);
+  const {
+    isActivePreloader,
+    setStatePreloader,
+    resetIsActivePreloaderContext,
+  } = useContext(PreloaderContext);
 
   const handleUpdateButtonClick = () => {
     setShowSubmitButton(true);
@@ -61,16 +70,18 @@ function Profile({ onMenuButtonClick, setLoggedIn }) {
 
     // Проверяем валидность каждого поля
     const isNameValid = nameInput.checkValidity();
-    if(!isNameValid){
+    if (!isNameValid) {
       setErrorMessage(nameInput.validationMessage.split(".")[0]);
     }
 
     const isEmailValid = emailRegex.test(emailInput.value);
-    if(!isEmailValid){
+    if (!isEmailValid) {
       setErrorMessage(ERROR_MESSAGE_INVALID_EMAIL);
     }
 
-    const hasDataChanged = (nameInput.value !== currentUser.name || emailInput.value !== currentUser.email);
+    const hasDataChanged =
+      nameInput.value !== currentUser.name ||
+      emailInput.value !== currentUser.email;
 
     // Если оба поля валидны, активируем кнопку
     setIsActiveSubmitButton(isNameValid && isEmailValid && hasDataChanged);
@@ -87,7 +98,7 @@ function Profile({ onMenuButtonClick, setLoggedIn }) {
     navigate("/");
   }
 
-  function updateProfile(updatedUserData){
+  function updateProfile(updatedUserData) {
     setIsActiveSubmitButton(false);
 
     setStatePreloader(true);
@@ -97,13 +108,13 @@ function Profile({ onMenuButtonClick, setLoggedIn }) {
         email: updatedUserData.email,
       })
       .then((response) => {
-        setCurrentUser({name: response.name, email: response.email});
+        setCurrentUser({ name: response.name, email: response.email });
         setShowSubmitButton(false);
         setShowSuccessMessage(true);
       })
       .catch((error) => {
         setErrorMessage(error.message);
-        if (error.status === 409){
+        if (error.status === 409) {
           setIsDisabledInputField(false);
         }
         setIsActiveSubmitButton(false);

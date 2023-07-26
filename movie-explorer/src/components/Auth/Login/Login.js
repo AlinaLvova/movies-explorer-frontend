@@ -7,7 +7,7 @@ import SubmitButton from "../SubmitButton/SubmitButton";
 import FormNav from "../FormNav/FormNav";
 import Header from "../../Common/Header/Header";
 import mainApi from "../../../utils/MainApi";
-import { ERROR_MESSAGE_INVALID_EMAIL } from "../../../utils/constant";
+import { ERROR_MESSAGE_INVALID_EMAIL, EMAIL_REGEX } from "../../../utils/constant";
 import { PreloaderContext } from "../../../contexts/PreloaderContext";
 import Preloader from "../../Preloader/Preloader";
 
@@ -56,7 +56,7 @@ function Login(props) {
 
     if (formElement.id === "email") {
       // Проверка ввода email с помощью регулярного выражения
-      const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      const emailRegex = EMAIL_REGEX;
       if (!emailRegex.test(formElement.value)) {
         errorMessage = ERROR_MESSAGE_INVALID_EMAIL;
       }

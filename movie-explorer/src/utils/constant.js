@@ -9,6 +9,8 @@ const ERROR_MESSAGE_INVALID_EMAIL = "Пожалуйста, укажите кор
 const SUCCESS_MESSAGE_UPDATE_PROFILE = "Новые данные профиля успешно сохранены.";
 const SHORT_MOVIE_DURATION = 40;
 
+const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+
 module.exports = {
   MENU_ICON_SCREEN_WIDTH,
   BASE_URL,
@@ -18,4 +20,5 @@ module.exports = {
   ERROR_MESSAGE_NOT_KEY_SEARCH,
   ERROR_MESSAGE_INVALID_EMAIL,
   SUCCESS_MESSAGE_UPDATE_PROFILE,
+  EMAIL_REGEX,
 };
