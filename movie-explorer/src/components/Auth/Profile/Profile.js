@@ -61,8 +61,10 @@ function Profile({ onMenuButtonClick, setLoggedIn }) {
       setErrorMessage(ERROR_MESSAGE_INVALID_EMAIL);
     }
 
+    const hasDataChanged = (nameInput.value !== currentUser.name || emailInput.value !== currentUser.email);
+
     // Если оба поля валидны, активируем кнопку
-    setIsActiveSubmitButton(isNameValid && isEmailValid);
+    setIsActiveSubmitButton(isNameValid && isEmailValid && hasDataChanged);
   }
 
   function handleLogoutButtonClick() {
