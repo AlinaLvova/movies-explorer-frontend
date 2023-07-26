@@ -6,7 +6,7 @@ import image_404 from "../../../images/404.webp";
 import "./MoviesCard.css";
 import { MovieContext } from "../../../contexts/MovieContext";
 
-function MoviesCard({ movieId, title, duration, backdrop, trailerLink, _id }) {
+function MoviesCard({ movieId, title, duration, backdrop, trailerLink}) {
   const [favourites, setFavourites] = useState(false);
   const { addSavedMovie, removeSavedMovie, savedMovies, movies } = useContext(MovieContext);
   const location = useLocation();
@@ -26,7 +26,7 @@ function MoviesCard({ movieId, title, duration, backdrop, trailerLink, _id }) {
         setFavourites(isFavorite);
       }
     }
-  }, [savedMovies, movies]);
+  }, [savedMovies, movies, isFavoritesRoute, movieId]);
 
   function handleClick(event) {
     event.preventDefault();
