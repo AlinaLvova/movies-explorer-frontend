@@ -28,6 +28,10 @@ function Register(props) {
     email: "",
     password: "",
   });
+  const [sentDataForm, setSentDataForm] = useState({
+    email: "",
+    password: "",
+  });
   const [errorResponseMessage, setErrorResponseMessage] = useState("");
   const [isActiveSubmitButton, setIsActiveSubmitButton] = useState(false);
   const { isActivePreloader, setStatePreloader } = useContext(PreloaderContext);
@@ -50,8 +54,9 @@ function Register(props) {
     const hasError = Object.values(errorMessages).some(
       (message) => message !== ""
     );
+    const hasDataChanged = (dataForm.email !== sentDataForm.email || dataForm.name !== sentDataForm.name);
     // Set the isActiveSubmitButton state accordingly
-    setIsActiveSubmitButton(!hasEmptyField && !hasError);
+    setIsActiveSubmitButton(!hasEmptyField && !hasError && hasDataChanged);
   }
 
   function validateFormFields(formElement) {
@@ -110,6 +115,7 @@ function Register(props) {
               navigate('/movies');
           })
           .catch((err) => {
+            setSentDataForm({ email: dataForm.email, name: dataForm.name })
             console.log(err.status, err.errorMessage);
           });
       })
@@ -126,6 +132,7 @@ function Register(props) {
           setErrorResponseMessage(err.message);
         }
         setIsActiveSubmitButton(false);
+        setSentDataForm({ email: dataForm.email, name: dataForm.name });
       })
       .finally(() => {
         setStatePreloader(false);
