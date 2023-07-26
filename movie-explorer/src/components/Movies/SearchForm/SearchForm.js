@@ -1,8 +1,9 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 import "./SearchForm.css";
 import Switcher from "./Switcher/Switcher";
 import { ERROR_MESSAGE_NOT_KEY_SEARCH } from "../../../utils/constant";
-import { SearchContext } from "../../../contexts/SearchContext";
 
 function SearchForm({
   onSearch,
@@ -16,11 +17,18 @@ function SearchForm({
   isSaved
 }) {
   const [errorMessageNotFound, setErrorMessageNotFound] = useState("");
-  //const {setTerms} = useContext(SearchContext);
+  const location = useLocation();
 
   function handleCheckboxChange() {
     setSwitcherMode(!switcherMode);
   }
+
+  useEffect(() => {
+    if(location.pathname === "/saved-movies"){
+      setSearchQuery("");
+      setSwitcherMode(false);
+    }
+  }, [location.pathname]);
 
   useEffect(() => {
     if (searchQuery !== "" || isSaved) {
