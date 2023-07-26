@@ -125,7 +125,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={loggedIn ? <Navigate to="/movies" replace /> : <Main />}
+            element={<Main/>}
           />
           <Route
             exact
