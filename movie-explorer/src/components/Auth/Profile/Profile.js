@@ -4,7 +4,7 @@ import Header from "../../Common/Header/Header";
 import SubmitButton from "../../Auth/SubmitButton/SubmitButton";
 import Preloader from "../../Preloader/Preloader";
 
-import { ERROR_MESSAGE_INVALID_EMAIL } from "../../../utils/constant";
+import { ERROR_MESSAGE_INVALID_EMAIL, SUCCESS_MESSAGE_UPDATE_PROFILE } from "../../../utils/constant";
 import { PreloaderContext } from "../../../contexts/PreloaderContext";
 import { CurrentUserContext } from "../../../contexts/CurrentUserContext";
 
@@ -21,15 +21,18 @@ function Profile({ onMenuButtonClick, setLoggedIn }) {
     name: currentUser.name,
     email: currentUser.email,
   });
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
-  const [updateButton, setUpdateButton] = useState(false);
+  const [showSubmitButton, setShowSubmitButton] = useState(false);
+  const [showUpdateButton, setShowUpdateButton] = useState(true);
   const [isActiveSubmitButton, setIsActiveSubmitButton] = useState(false);
   const [isDisabledInputField, setIsDisabledInputField] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const { isActivePreloader, setStatePreloader } = useContext(PreloaderContext);
 
   const handleUpdateButtonClick = () => {
-    setUpdateButton(true);
+    setShowSubmitButton(true);
+    setShowUpdateButton(false);
     setIsDisabledInputField(false);
   };
 
@@ -84,8 +87,8 @@ function Profile({ onMenuButtonClick, setLoggedIn }) {
       })
       .then((response) => {
         setCurrentUser({name: response.name, email: response.email});
-        setUpdateButton(false);
-        setIsDisabledInputField(true);
+        setShowSubmitButton(false);
+        setShowSuccessMessage(true);
       })
       .catch((error) => {
         setErrorMessage(error.message);
@@ -98,6 +101,18 @@ function Profile({ onMenuButtonClick, setLoggedIn }) {
         setStatePreloader(false);
       });
   }
+
+  useEffect(() => {
+    if (showSuccessMessage) {
+      const timerId = setTimeout(() => {
+        setShowSuccessMessage(false);
+        setIsDisabledInputField(true);
+        setShowUpdateButton(true);
+      }, 3000);
+
+      return () => clearTimeout(timerId);
+    }
+  }, [showSuccessMessage]);
 
   function handleSubmitUpdateProfile(event) {
     event.preventDefault();
@@ -113,7 +128,7 @@ function Profile({ onMenuButtonClick, setLoggedIn }) {
       <main className="content">
         <section className="profile">
           <h1 className="profile__greetings">Привет, {currentUser.name}!</h1>
-          <form 
+          <form
             className="profile__data-container"
             action="#"
             onSubmit={handleSubmitUpdateProfile}
@@ -148,8 +163,8 @@ function Profile({ onMenuButtonClick, setLoggedIn }) {
                 disabled={isDisabledInputField}
               />
             </div>
-            {isActivePreloader && <Preloader/>}
-            {updateButton && (
+            {isActivePreloader && <Preloader />}
+            {showSubmitButton && (
               <div className="profile__update-container">
                 <span className="profile__span-update">{errorMessage}</span>
                 <SubmitButton
@@ -159,8 +174,15 @@ function Profile({ onMenuButtonClick, setLoggedIn }) {
                 />
               </div>
             )}
+            {showSuccessMessage && (
+              <div className="profile__update-container">
+                <span className={`profile__success-message`}>
+                  {SUCCESS_MESSAGE_UPDATE_PROFILE}
+                </span>
+              </div>
+            )}
           </form>
-          {!updateButton && (
+          {showUpdateButton && (
             <div className="profile__update-container">
               <button
                 className="profile__update-btn link"

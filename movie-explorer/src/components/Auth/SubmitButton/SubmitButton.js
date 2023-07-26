@@ -11,7 +11,6 @@ function SubmitButton({ title, onClick, isActive, errorMessage }) {
     <>
     <span className={`submit-button-error-message ${errorMessage !== '' ? "active" : ""}`}>{errorMessage}</span>
     <button
-      //onClick={handleClick}
       type="submit"
       className={`submit-button link ${
         !isActive ? "submit-button_inactive" : ""
