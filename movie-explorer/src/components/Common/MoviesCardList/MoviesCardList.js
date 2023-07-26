@@ -49,7 +49,7 @@ function MoviesCardList({ movies, isActive, loadMoreButtomMove }) {
         {visibleCards.length > 0 &&
           visibleCards.map((movie, index) => (
             <MoviesCard
-              key={index}
+              key={movie.movieId}
               movieId={movie.movieId}
               title={movie.title}
               duration={movie.duration}
