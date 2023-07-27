@@ -146,7 +146,7 @@ function Profile({ onMenuButtonClick, setLoggedIn }) {
 
   return (
     <div className="page__container">
-      <Header onClickMenuButton={onMenuButtonClick}></Header>
+      <Header onClickMenuButton={onMenuButtonClick} isLoggedIn={true}></Header>
       <main className="content">
         <section className="profile">
           <h1 className="profile__greetings">Привет, {currentUser.name}!</h1>

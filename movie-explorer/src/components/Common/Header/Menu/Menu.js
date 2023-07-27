@@ -4,15 +4,21 @@ import "../HeaderCommon/HeaderCommon";
 import usePopupClose from "../../../../hooks/usePopupClose";
 import ProfileButton from "../ProfileButton/ProfileButton";
 
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 
 function Menu({ isOpen, onClose }) {
   usePopupClose(isOpen, onClose);
+  const location = useLocation();
+
+  const [isBlueBackground, setIsBlueBackground] = useState(location.pathname === "/");
+  useEffect(() => {
+    setIsBlueBackground(location.pathname === "/");
+  }, [location.pathname]);
 
   return (
     <div className={`popup ${isOpen ? "popup_opened" : ""}`}>
-      <menu className={`menu ${isOpen ? "open" : ""}`}>
+      <menu className={`menu ${isOpen ? "open" : ""}  ${isBlueBackground ? "menu_logged-in" : ""}`}>
         {isOpen && (
           <nav className="menu__container">
             <button type="button" className="menu__close-button link" onClick={onClose} />
@@ -43,7 +49,7 @@ function Menu({ isOpen, onClose }) {
                 </NavLink>
             </ul>
             <div className="menu__account">
-              <ProfileButton />
+              <ProfileButton/>
             </div>
           </nav>
         )}

@@ -12,6 +12,10 @@
     max-width: 100vw;
 }
 
+.menu_logged-in{
+    background-color: var(--background-color-blue) !important;
+}
+
 .menu.open {
     transform: translateX(0);
 }

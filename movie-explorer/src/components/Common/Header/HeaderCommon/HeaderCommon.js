@@ -29,7 +29,7 @@ function HeaderCommon() {
           Сохранённые фильмы
         </NavLink>
       </div>
-      <ProfileButton />
+      <ProfileButton/>
     </nav>
   );
 }

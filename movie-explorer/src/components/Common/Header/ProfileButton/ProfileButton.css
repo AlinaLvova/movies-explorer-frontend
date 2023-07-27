@@ -23,12 +23,13 @@
     background-repeat: no-repeat;
     background-position: 99% 50%;
     background-size: 27px 27px;
-    /* display: flex; */
-    /* flex-direction: row; */
-    /* align-items: center; */
     padding-top: 9%;
     box-sizing: border-box;
     border: none;
     object-fit: cover;
     margin: 0;
+}
+
+.profile-btn__link_background {
+    background-image: url(../../../../images/logo-account-logged-in.svg);
 }

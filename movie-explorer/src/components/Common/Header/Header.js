@@ -5,7 +5,7 @@ import "./Header.css";
 import "../constant/common.css";
 import { MENU_ICON_SCREEN_WIDTH } from "../../../utils/constant.js";
 
-function Header({ onClickMenuButton }) {
+function Header({ onClickMenuButton, isLoggedIn }) {
   const location = useLocation();
   const [headerColor, setHeaderColor] = useState(
     location.pathname === "/" ? "landing" : "main"
@@ -53,7 +53,7 @@ function Header({ onClickMenuButton }) {
         <Link to={"/"}
           className="header__logo link"
         />
-        {location.pathname === "/" ? (
+        {(location.pathname === "/" &&  !isLoggedIn)? (
           <div className="header__auth">
             <Link to="/signup" className="button-style header__signup-button link">
                 Регистрация

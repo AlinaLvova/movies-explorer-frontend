@@ -125,7 +125,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Main/>}
+            element={<Main isLoggedIn={loggedIn} onMenuButtonClick={handleOpenMenu}/>}
           />
           <Route
             exact
@@ -191,7 +191,7 @@ function App() {
           {/* <Route path="/" element={<Main />} /> */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <Menu isOpen={isMenuOpen} onClose={closeAllPopups} />
+        <Menu isOpen={isMenuOpen} onClose={closeAllPopups}/>
       </VisibleRowsProvider>
     </div>
   );
