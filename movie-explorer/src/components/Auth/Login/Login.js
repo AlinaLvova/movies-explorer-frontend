@@ -93,7 +93,7 @@ function Login(props) {
     if (props.loggedIn) {
       navigate("/movies");
     }
-  }, [props.loggedIn, navigate]);
+  }, [props.loggedIn]);
 
   function loginUser(dataForm) {
     setStatePreloader(true);

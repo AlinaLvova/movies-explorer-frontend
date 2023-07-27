@@ -58,7 +58,6 @@ function App() {
         .then((userData) => {
           setCurrentUser(userData);
           setLoggedIn(true);
-          navigate("/movies");
         })
         .catch((error) => {
           console.log(error);
@@ -125,26 +124,22 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Main isLoggedIn={loggedIn} onMenuButtonClick={handleOpenMenu}/>}
+            element={
+              <Main isLoggedIn={loggedIn} onMenuButtonClick={handleOpenMenu} />
+            }
           />
           <Route
             exact
             path="/signin"
             element={
-              <Login
-                loggedIn={loggedIn}
-                setLoggedIn={handleSetLoggedIn}
-              />
+              <Login loggedIn={loggedIn} setLoggedIn={handleSetLoggedIn} />
             }
           />
           <Route
             exact
             path="/signup"
             element={
-              <Register
-                loggedIn={loggedIn}
-                setLoggedIn={handleSetLoggedIn}
-              />
+              <Register loggedIn={loggedIn} setLoggedIn={handleSetLoggedIn} />
             }
           />
           <Route
@@ -187,11 +182,9 @@ function App() {
               />
             }
           />
-
-          {/* <Route path="/" element={<Main />} /> */}
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound  isLoggedIn={loggedIn} />}/>
         </Routes>
-        <Menu isOpen={isMenuOpen} onClose={closeAllPopups}/>
+        <Menu isOpen={isMenuOpen} onClose={closeAllPopups} />
       </VisibleRowsProvider>
     </div>
   );

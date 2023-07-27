@@ -147,7 +147,7 @@ function Register(props) {
     if (props.loggedIn) {
       navigate("/movies");
     }
-  }, [props.loggedIn, navigate]);
+  }, [props.loggedIn]);
 
   return (
     <div className="page__container page__container-auth">
