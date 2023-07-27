@@ -28,13 +28,13 @@ function SearchForm({
       setSearchQuery("");
       setSwitcherMode(false);
     }
-  }, [location.pathname, setSearchQuery, setSwitcherMode]);
+  }, [location.pathname, setSwitcherMode]);
 
   useEffect(() => {
     if (searchQuery !== "" || isSaved) {
       onSearch();
     }
-  }, [isSaved, onSearch, searchQuery, switcherMode]);
+  }, [isSaved, switcherMode]); //добавить после поиск сразу после ввода - зависимость от query
 
   const handleChangeInput = (event) => {
     event.preventDefault();
