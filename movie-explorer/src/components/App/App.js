@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { MovieContext } from "../../contexts/MovieContext";
 import { VisibleRowsProvider } from "../../contexts/VisibleRowsContext";
@@ -23,7 +23,6 @@ import ProtectedRouteElement from "../ProtectedRoute/ProtectedRoute";
 import mainApi from "../../utils/MainApi";
 
 function App() {
-  const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
