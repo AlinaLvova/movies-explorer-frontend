@@ -50,10 +50,10 @@
     .not-found__back-link {
         padding-bottom: 29%;
     }
-
+/* 
     .not-found__header {
         padding: 29% 0 0;
-    }
+    } */
 }
 
 @media screen and (max-width: 500px) {
