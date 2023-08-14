@@ -36,7 +36,6 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://github.com/AlinaLvova/movies-explorer-frontend/movie-explorer",
   "devDependencies": {
     "gh-pages": "^5.0.0"
   }

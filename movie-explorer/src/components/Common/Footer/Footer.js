@@ -24,7 +24,6 @@ function Footer() {
           <li>
             <Link
               to={"https://practicum.yandex.ru/"}
-              className="footer__link"
               rel="noreferrer"
               target="_blank"
               className="footer__text link"
@@ -35,7 +34,6 @@ function Footer() {
           <li>
             <Link
               to={"https://github.com/AlinaLvova"}
-              className="footer__link"
               rel="noreferrer"
               target="_blank"
               className="footer__text link"

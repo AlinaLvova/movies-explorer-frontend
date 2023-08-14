@@ -59,6 +59,35 @@
     justify-content: flex-end;
 }
 
+.profile__success-message {
+    color: var(--button-color-green);
+    text-align: center;
+    font-family: Inter;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-top: 15px;
+    height: 20px;
+    opacity: 0;
+    /* Start with 0 opacity to make it invisible */
+    visibility: hidden;
+    /* Hide the element initially */
+    animation: fadeInOut 3s ease-in-out;
+    /* Apply the animation */
+}
+
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+    30%, 70% {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
 .profile__span-update{
     margin-bottom: 4px;
     padding: 0;

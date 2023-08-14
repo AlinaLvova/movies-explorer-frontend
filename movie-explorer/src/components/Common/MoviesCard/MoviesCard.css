@@ -9,6 +9,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-sizing: border-box;
 }
 
 .movies-card__link{
@@ -67,7 +68,7 @@
     background-position: center center;
     background-size: contain;
     box-sizing: content-box;
-    object-position: 0 0;
+    /* object-position: center center; */
     height: 203px;
 }
 

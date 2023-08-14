@@ -13,6 +13,10 @@
     padding-bottom: 175px;
 }
 
+.movies-card-list.movies-card-list_padding.disabled{
+    padding-bottom: 0 !important;
+}
+
 .movies-card-list__container {
     padding: 0;
     margin: 0;
@@ -106,5 +110,11 @@
     .movies-card-list__button {
         width: 240px;
         margin-bottom: 50px;
+    }
+}
+
+@media screen and (max-width: 340px) and (min-width:320px){
+    .movies-card-list__container{
+        width: auto;
     }
 }

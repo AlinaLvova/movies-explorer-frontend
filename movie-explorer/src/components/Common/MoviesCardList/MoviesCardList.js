@@ -1,39 +1,25 @@
 import React, { useState, useEffect, useContext } from "react";
-
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import { MovieContext } from "../../../contexts/MovieContext";
 import { VisibleRowsContext } from "../../../contexts/VisibleRowsContext";
 
-const calculateStartColumnsCount = () => {
-  if (window.innerWidth >= 1668) return 4;
-  if (window.innerWidth >= 1028) return 3;
-  if (window.innerWidth >= 610) return 2;
-  return 1;
-};
+function MoviesCardList({ movies, isActive, loadMoreButtomMove }) {
+  const {
+    addRows,
+    cardCount,
+    setCardCount,
+    calculateStartColumnsAndRowsCount,
+  } = useContext(VisibleRowsContext);
+  const [visibleCards, setVisibleCards] = useState([]);
 
-function MoviesCardList({ cards }) {
-  const { savedMovies, addMovie, removeMovie } = useContext(MovieContext);
-  const { addRows, getRows } = useContext(VisibleRowsContext);
-
-  const startVisibleRows = getRows();
-  const [columns, setColumns] = useState(calculateStartColumnsCount());
-
-  const [cardCount, setCardCount] = useState(startVisibleRows * columns);
-
-  const calculateColumns = (cards) => {
-    const newColumns = calculateStartColumnsCount();
-    setColumns(newColumns);
-    const requiredCardCount = newColumns * startVisibleRows;
-    if (cards.length < requiredCardCount) {
-      setCardCount(cards.length);
-    } else {
-      setCardCount(requiredCardCount);
-    }
+  const calculateColumns = () => {
+    const { columns, rows } = calculateStartColumnsAndRowsCount();
+    const requiredCardCount = columns * rows;
+    setCardCount(requiredCardCount);
   };
 
   useEffect(() => {
-    calculateColumns({ cards });
+    calculateColumns(); // Initial calculation on component mount
 
     window.addEventListener("resize", calculateColumns);
 
@@ -42,35 +28,37 @@ function MoviesCardList({ cards }) {
     };
   }, []);
 
-  // useEffect(() => {
-  //   calculateColumns(cards);
-  // }, [cards.length]);
-
   const loadMoreCards = () => {
-    setCardCount(cardCount + columns);
+    const newCardCount =
+      cardCount + calculateStartColumnsAndRowsCount().columns;
+    setCardCount(newCardCount);
     addRows();
   };
 
-  const visibleCards = cards.slice(0, cardCount);
+  useEffect(() => {
+    setVisibleCards(!loadMoreButtomMove ? movies : movies.slice(0, cardCount));
+  }, [cardCount, loadMoreButtomMove, movies]);
 
   return (
-    <section className={`movies-card-list ${cardCount < cards.length ? "" : "movies-card-list_padding"}`}>
+    <section
+      className={`movies-card-list ${
+        cardCount < movies.length ? "" : "movies-card-list_padding"
+      } ${isActive ? "disabled" : ""}`}
+    >
       <ul className="movies-card-list__container">
-        {visibleCards.map((movie, index) => (
-          <MoviesCard
-            key={index}
-            title={movie.title}
-            duration={movie.duration}
-            backdrop={movie.backdrop}
-            isSaved={savedMovies.some(
-              (savedMovie) => savedMovie.title === movie.title
-            )}
-            onAddToSaved={addMovie}
-            onRemoveFromSaved={removeMovie}
-          />
-        ))}
+        {visibleCards.length > 0 &&
+          visibleCards.map((movie, index) => (
+            <MoviesCard
+              key={movie.movieId}
+              movieId={movie.movieId}
+              title={movie.title}
+              duration={movie.duration}
+              backdrop={movie.backdrop}
+              trailerLink={movie.trailerLink}
+            />
+          ))}
       </ul>
-      {cardCount < cards.length && (
+      {cardCount < movies.length && loadMoreButtomMove && (
         <button
           type="button"
           className="movies-card-list__button link"

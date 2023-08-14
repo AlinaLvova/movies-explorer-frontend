@@ -1,15 +1,29 @@
-import { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 export const VisibleRowsContext = createContext();
 
 export const VisibleRowsProvider = ({ children }) => {
-  const [visibleRows, setVisibleRows] = useState(2);
-  const [visibleRowsSaved, setVisibleRowsSaved] = useState(2);
-  const location = useLocation();
+  const [visibleRows, setVisibleRows] = useState(0);
+  const [visibleRowsSaved, setVisibleRowsSaved] = useState(0);
+  const [cardCount, setCardCount] = useState(0);
   const [prevPathname, setPrevPathname] = useState("");
+  const location = useLocation();
 
-  //переход между этими двумя роутами не сворачивает уже открывшиеся фильмы. (перенести в контекст)
+  const resetVisibleRowsContext = () => {
+    setVisibleRows(0);
+    setVisibleRowsSaved(0);
+    setCardCount(0);
+    setPrevPathname("");
+  };
+
+  const calculateStartColumnsAndRowsCount = () => {
+    if (window.innerWidth >= 1668) return { columns: 4, rows: 3 };
+    if (window.innerWidth >= 1028) return { columns: 3, rows: 4 };
+    if (window.innerWidth >= 610) return { columns: 2, rows: 4 };
+    return { columns: 1, rows: 5 };
+  };
+
   useEffect(() => {
     const pathname = location.pathname;
     if (
@@ -22,13 +36,21 @@ export const VisibleRowsProvider = ({ children }) => {
       resetRows();
     }
     setPrevPathname(pathname);
-  }, [location.pathname]);
+  }, [location.pathname, prevPathname]);
+
+  useEffect(() => {
+    const { columns, rows } = calculateStartColumnsAndRowsCount();
+    const requiredCardCount = columns * rows;
+    setCardCount(requiredCardCount);
+    setVisibleRows(rows);
+    setVisibleRowsSaved(rows);
+  }, []);
 
   const addRows = () => {
     const pathname = location.pathname;
-    if (pathname === "/movies") setVisibleRows(visibleRows + 1);
+    if (pathname === "/movies") setVisibleRows((prevRows) => prevRows + 1);
     else {
-      setVisibleRowsSaved(visibleRowsSaved + 1);
+      setVisibleRowsSaved((prevRows) => prevRows + 1);
     }
   };
 
@@ -47,7 +69,16 @@ export const VisibleRowsProvider = ({ children }) => {
 
   return (
     <VisibleRowsContext.Provider
-      value={{ getRows, addRows, visibleRows, visibleRowsSaved }}
+      value={{
+        getRows,
+        addRows,
+        visibleRows,
+        visibleRowsSaved,
+        cardCount,
+        setCardCount,
+        calculateStartColumnsAndRowsCount,
+        resetVisibleRowsContext
+      }}
     >
       {children}
     </VisibleRowsContext.Provider>
